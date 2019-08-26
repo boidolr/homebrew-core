@@ -1,15 +1,14 @@
 class LibbitcoinBlockchain < Formula
   desc "Bitcoin Blockchain Library"
   homepage "https://github.com/libbitcoin/libbitcoin-blockchain"
-  url "https://github.com/libbitcoin/libbitcoin-blockchain/archive/v3.5.0.tar.gz"
-  sha256 "03b8362c9172edbeb1e5970c996405cd2738e8274ba459e9b85359d6b838de20"
-  revision 3
+  url "https://github.com/libbitcoin/libbitcoin-blockchain/archive/v3.6.0.tar.gz"
+  sha256 "d0cd036a1ec10063e9eb6fe4b198b0acecbbda73aa78c7d314f924866907ff0a"
 
   bottle do
     cellar :any
-    sha256 "7301c99698b7529ec3e4b9a29da8b3afe75101fb7de3366f70d6228d1212bf70" => :mojave
-    sha256 "9b3c959d4a645285400be4633eb57ff70578d7d04a7446322b783ba41eed7037" => :high_sierra
-    sha256 "c8a16c4ec548327c24c42991c0cb2eac948ab77dcf828eee77c28bd38f6d2e9c" => :sierra
+    sha256 "381c63f70509cd74addd5981dd6f5ef48cc3fa0dcbe3153b205f408f196376d5" => :mojave
+    sha256 "ebd3efe29001f1c4e74877ab0267d8ebdc43e3222c6bc8df2e10b489b886c141" => :high_sierra
+    sha256 "cf2845efcd1676bd16ac497537915296bd6d3e7bfa6b32cf970b32d0a0ccf69d" => :sierra
   end
 
   depends_on "autoconf" => :build

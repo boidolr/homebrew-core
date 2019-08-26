@@ -1,15 +1,14 @@
 class Kore < Formula
   desc "Web application framework for writing web APIs in C"
   homepage "https://kore.io/"
-  url "https://kore.io/releases/kore-3.1.0.tar.gz"
-  sha256 "3f78fb03262046ffa036a7e112dbcbc45fbfca509a949b42f87a55da409f6595"
+  url "https://kore.io/releases/kore-3.3.1.tar.gz"
+  sha256 "c80d7a817883e631adf9eb5271b4ffa6ebb06c2e2fca40ce6c3c75638c08b67a"
   head "https://github.com/jorisvink/kore.git"
 
   bottle do
-    rebuild 1
-    sha256 "946ce6d884b60a4a0d0914e0d46284ba079078f03a4daf17dcfc36bd9411800d" => :mojave
-    sha256 "affd88a8f829810108c075e57f1e797302849a50c1d0948ecab8bec499ef7177" => :high_sierra
-    sha256 "42c0c518094b65d21befa71388c37d8bf0f9f0fe1fe8f8b7f5509a258cb15fe0" => :sierra
+    sha256 "6a95d524179a182edc173a57844b7a1da84c6ef8976cfbff7f547925b1fc642d" => :mojave
+    sha256 "8570b9dab42658062561ea23228c151ba71de5f73d2d123227a7cd2c65cba16c" => :high_sierra
+    sha256 "4eb2eb9964edaff6047fb3f6e81b4c6e735962b48f6f264ef35fe04e0a604f9f" => :sierra
   end
 
   depends_on :macos => :sierra # needs clock_gettime

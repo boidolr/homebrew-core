@@ -1,14 +1,14 @@
 class Cointop < Formula
   desc "Interactive terminal based UI application for tracking cryptocurrencies"
   homepage "https://cointop.sh"
-  url "https://github.com/miguelmota/cointop/archive/1.1.3.tar.gz"
-  sha256 "a9438b1a924a4c685c6c5102cf64988ff9ce773a0abb60009409a426a7112ad0"
+  url "https://github.com/miguelmota/cointop/archive/1.3.4.tar.gz"
+  sha256 "8024736c908c1253ab4d2cb30df0f1dc977ccc4e51abb4614b43131d3b7405b2"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "4c025b09009d37cfffeb62f6571f4f8fa2a41c9f7410093df981b8ae240fa16a" => :mojave
-    sha256 "48d40919b248fc9954202b1e84b77e2a8da9ec74dc3913575c5601bf3a384610" => :high_sierra
-    sha256 "f02a1de5c7ad86be3d5a6d4e48b4f0baa2c7c53dbc90415fd806dec95f354ff9" => :sierra
+    sha256 "c86c477f34dda055020d6732e38bbcbb475a8cecf8b19691631adbf5d84a5a26" => :mojave
+    sha256 "50f386cf61ac89b31b0f156841d6891bcf7f26ea6a740b96a01e043c01c36ac2" => :high_sierra
+    sha256 "78a64204c0b7524b2a38879b40ee280e818e32973ebc82469cba2bea8882763a" => :sierra
   end
 
   depends_on "go" => :build
@@ -24,6 +24,6 @@ class Cointop < Formula
   end
 
   test do
-    system bin/"cointop", "-test"
+    system bin/"cointop", "test"
   end
 end

@@ -1,15 +1,15 @@
 class Hydra < Formula
   desc "Network logon cracker which supports many services"
   homepage "https://github.com/vanhauser-thc/thc-hydra"
-  url "https://github.com/vanhauser-thc/thc-hydra/archive/v8.8.tar.gz"
-  sha256 "bc895a7aebdf0279186d40140f0dc1546ac6f3a5c5bc9d13b13766bffea3e966"
+  url "https://github.com/vanhauser-thc/thc-hydra/archive/v9.0.tar.gz"
+  sha256 "56672e253c128abaa6fb19e77f6f59ba6a93762a9ba435505a009ef6d58e8d0e"
   head "https://github.com/vanhauser-thc/thc-hydra.git"
 
   bottle do
     cellar :any
-    sha256 "dc025662292dff699b05e525ca4e19ce9b62385eeec20fa2597e2bbfdb2c3d10" => :mojave
-    sha256 "6c1d497320f91e0a366278b5186f21b5337bdd24760cb82c8225f34746ff8cf8" => :high_sierra
-    sha256 "0d92b2dcac84f0dfbb12b0a26c7213a4bc1e9742ab93e061cef02958cd8fd2ef" => :sierra
+    sha256 "7c5982a29e085723482af4e20852f243542f83d8b4f7c2f697c5522442a8e9d9" => :mojave
+    sha256 "bb88b58e028a3b2498da0eaae5fa1030cce8103336fc90ce813ebdd7a77f933f" => :high_sierra
+    sha256 "e2cf5b672b4f6328ce24264e5f0f17c5d78de9711878bc0bc9e1d1fe34efd916" => :sierra
   end
 
   depends_on "pkg-config" => :build

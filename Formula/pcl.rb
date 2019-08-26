@@ -3,13 +3,14 @@ class Pcl < Formula
   homepage "http://www.pointclouds.org/"
   url "https://github.com/PointCloudLibrary/pcl/archive/pcl-1.9.1.tar.gz"
   sha256 "0add34d53cd27f8c468a59b8e931a636ad3174b60581c0387abb98a9fc9cddb6"
-  revision 2
+  revision 4
   head "https://github.com/PointCloudLibrary/pcl.git"
 
   bottle do
-    sha256 "7ecd4263352d7292ed5d1f6eac8b5904fbb2db0ef504be51818c9e876dc62c40" => :mojave
-    sha256 "45342e83ec43a64dd67578fa160e161e27b8a8e1d9575ed15dcc7dd0c122e48d" => :high_sierra
-    sha256 "e64e2151cfee821f619a18bbb5dc2965848ab9115feee90f0d4108102ff8368b" => :sierra
+    rebuild 1
+    sha256 "5da061dd836baffd99b01afeec969793d4df2e1f1c7ea764de9317974723de46" => :mojave
+    sha256 "7b9941caff2bd52be9eb15db1ede5f31529a6f77082ad99bcbd49b0b19e08eee" => :high_sierra
+    sha256 "05b133c4e3e03ae77a84fe70bc1fbec2fc91f64516534c521a72e09772c034f2" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -22,6 +23,12 @@ class Pcl < Formula
   depends_on "libusb"
   depends_on "qhull"
   depends_on "vtk"
+
+  # Upstream patch for boost 1.70.0
+  patch do
+    url "https://github.com/PointCloudLibrary/pcl/commit/648932bc.diff?full_index=1"
+    sha256 "23f2cced7786715c59b49a48e4037eb9dea9abee099c4c5c92d95a647636b5ec"
+  end
 
   def install
     args = std_cmake_args + %w[

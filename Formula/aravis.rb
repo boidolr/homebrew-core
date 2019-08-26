@@ -1,14 +1,13 @@
 class Aravis < Formula
   desc "Vision library for genicam based cameras"
   homepage "https://wiki.gnome.org/Projects/Aravis"
-  url "https://github.com/AravisProject/aravis/archive/ARAVIS_0_6_1.tar.gz"
-  sha256 "d9795d36bfb1af230bda21d93bc81390f49d936c6c9b7b3043a5c09bd0f0f8d3"
+  url "https://download.gnome.org/sources/aravis/0.6/aravis-0.6.3.tar.xz"
+  sha256 "961ef50d7cacc9306c100e9146164b9a397fe128a12fd7395840d5e937ade026"
 
   bottle do
-    rebuild 1
-    sha256 "48bd639c714321d52ae4beff4a6ee94e130b3e538bae1df9527bd48f3d9aef7f" => :mojave
-    sha256 "e13f65a8fdca765cfc842faf4481d9e0ee84b7af116f251fa21efef5e85ad068" => :high_sierra
-    sha256 "ff24dda20db8c14a54ff34b11f7da695e29afb426df7ae91c97fd341cb0b39d8" => :sierra
+    sha256 "f7ec81b740fa25fd7c0fbdf94b8abdadb3afccdda6225b209493d85efdfe3558" => :mojave
+    sha256 "9c3f1816595219a8e21982ae52d1197d1b53f920f0baa57254ca268d8f06cbce" => :high_sierra
+    sha256 "eb3a787c91288e0c9d8a2c0211844e7c988b24d031f07f275a917cd71712f297" => :sierra
   end
 
   depends_on "autoconf" => :build
@@ -19,7 +18,9 @@ class Aravis < Formula
   depends_on "pkg-config" => :build
   depends_on "adwaita-icon-theme"
   depends_on "glib"
+  depends_on "gst-plugins-bad"
   depends_on "gst-plugins-base"
+  depends_on "gst-plugins-good"
   depends_on "gstreamer"
   depends_on "gtk+3"
   depends_on "intltool"
@@ -27,12 +28,19 @@ class Aravis < Formula
   depends_on "libusb"
 
   def install
-    inreplace "viewer/Makefile.am", "gtk-update-icon-cache", "gtk3-update-icon-cache"
-    system "./autogen.sh", "--disable-dependency-tracking",
-                           "--disable-silent-rules",
-                           "--enable-introspection",
-                           "--prefix=#{prefix}"
+    # icon cache update must happen in post_install
+    inreplace "viewer/Makefile.am", "install-data-hook: install-update-icon-cache", ""
+
+    system "autoreconf", "-fi"
+    system "./configure", "--disable-dependency-tracking",
+                          "--disable-silent-rules",
+                          "--enable-introspection",
+                          "--prefix=#{prefix}"
     system "make", "install"
+  end
+
+  def post_install
+    system "#{Formula["gtk+3"].opt_bin}/gtk3-update-icon-cache", "-f", "-t", "#{HOMEBREW_PREFIX}/share/icons/hicolor"
   end
 
   test do

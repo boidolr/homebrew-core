@@ -1,27 +1,14 @@
 class Mgba < Formula
   desc "Game Boy Advance emulator"
   homepage "https://mgba.io/"
-  revision 2
+  url "https://github.com/mgba-emu/mgba/archive/0.7.2.tar.gz"
+  sha256 "ed635e05798d3fa0d55e5abb439f6d1708d519e4ecd5ed10b9bc6e319ed9dba7"
   head "https://github.com/mgba-emu/mgba.git"
 
-  stable do
-    url "https://github.com/mgba-emu/mgba/archive/0.6.3.tar.gz"
-    sha256 "35c8906c01206adae714fee9c2bc39698c514a4adb32c9c4a5a3fa58b2d10f9a"
-
-    # Fix build with Qt 5.11.0
-    # https://github.com/Homebrew/homebrew-core/issues/28455
-    patch do
-      url "https://github.com/mgba-emu/mgba/commit/7f41dd35417.patch?full_index=1"
-      sha256 "14a3c1100830d13f0e6e1656b502c34cfc527b6e4db0d47a07e613caa622d47d"
-    end
-  end
-
   bottle do
-    cellar :any
-    sha256 "05f047199b814a992bd330dae526874a425f52d0e0ef674b4040950d0053b4ec" => :mojave
-    sha256 "b35eb17585007f58d73104a6cee5c9fd4ade4073f714f8cd4d595eeb9b1e9073" => :high_sierra
-    sha256 "c4a7b9598e074a904a466d4f7f540a67c511131f780a6898b1b8def3e33058ba" => :sierra
-    sha256 "fafaa47a86e92ad1877814abcf7a6d7159188e02ba2e63ad8f171116d49f5546" => :el_capitan
+    sha256 "0f10a479ab180103084f35e3e897c5b0a417444366b8ecd27ea4d466a12bcf62" => :mojave
+    sha256 "4876e9acb21bbed3eaaf177593a7c17a96149976ca016f9ca87942fa0b641a29" => :high_sierra
+    sha256 "fabba640a9ab7f6637132c74f9416d5276eba1e509e7784c092860853be72682" => :sierra
   end
 
   depends_on "cmake" => :build

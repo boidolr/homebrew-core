@@ -1,15 +1,15 @@
 class Terraform < Formula
   desc "Tool to build, change, and version infrastructure"
   homepage "https://www.terraform.io/"
-  url "https://github.com/hashicorp/terraform/archive/v0.11.13.tar.gz"
-  sha256 "6a7440aa752d15111a8e5fb00969a533e288e8b348ba2e425222d7151398aa86"
+  url "https://github.com/hashicorp/terraform/archive/v0.12.7.tar.gz"
+  sha256 "1c4b04e219de9325b3c018679004795fd90c4f5148c6249ff43b156e35f58d56"
   head "https://github.com/hashicorp/terraform.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "a979f1cd1bd2a247c9d446c61a42f0640b49745db074c61f9271b205e9444a29" => :mojave
-    sha256 "3a256286c866424853162834988d6e52a0912a7fe23824776ba3165bea76b1b0" => :high_sierra
-    sha256 "24408628538b0b382f2ed8bef9b19faa9d4f3654e746641f7e5d59aae3eed4b3" => :sierra
+    sha256 "a93f20602d705daee74a8eaefc92d7d2a919c230acdf7c268df8794807e1c52b" => :mojave
+    sha256 "12ea96748af0772c0027ced78225bc0d1a8704578d1116e29aa4f5acf0f3bb41" => :high_sierra
+    sha256 "ddc69e0a9b3f7403d835fa19e8b9253ca4521b05e2781aad5a6e44426f6456fd" => :sierra
   end
 
   depends_on "go" => :build
@@ -42,29 +42,29 @@ class Terraform < Formula
     minimal = testpath/"minimal.tf"
     minimal.write <<~EOS
       variable "aws_region" {
-          default = "us-west-2"
+        default = "us-west-2"
       }
 
       variable "aws_amis" {
-          default = {
-              eu-west-1 = "ami-b1cf19c6"
-              us-east-1 = "ami-de7ab6b6"
-              us-west-1 = "ami-3f75767a"
-              us-west-2 = "ami-21f78e11"
-          }
+        default = {
+          eu-west-1 = "ami-b1cf19c6"
+          us-east-1 = "ami-de7ab6b6"
+          us-west-1 = "ami-3f75767a"
+          us-west-2 = "ami-21f78e11"
+        }
       }
 
       # Specify the provider and access details
       provider "aws" {
-          access_key = "this_is_a_fake_access"
-          secret_key = "this_is_a_fake_secret"
-          region = "${var.aws_region}"
+        access_key = "this_is_a_fake_access"
+        secret_key = "this_is_a_fake_secret"
+        region     = var.aws_region
       }
 
       resource "aws_instance" "web" {
         instance_type = "m1.small"
-        ami = "${lookup(var.aws_amis, var.aws_region)}"
-        count = 4
+        ami           = var.aws_amis[var.aws_region]
+        count         = 4
       }
     EOS
     system "#{bin}/terraform", "init"

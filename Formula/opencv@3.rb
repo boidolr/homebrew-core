@@ -3,11 +3,12 @@ class OpencvAT3 < Formula
   homepage "https://opencv.org/"
   url "https://github.com/opencv/opencv/archive/3.4.5.tar.gz"
   sha256 "0c57d9dd6d30cbffe68a09b03f4bebe773ee44dc8ff5cd6eaeb7f4d5ef3b428e"
+  revision 3
 
   bottle do
-    sha256 "18209065db7e487bd9bdcb576eb0be29f8cbfd8532619b7248c3c54329eb865b" => :mojave
-    sha256 "37dfc81ebac9af7b5b0a0429bada4e67608c29b3e79da9520e2a33889c26b838" => :high_sierra
-    sha256 "c949f08c50e83542e9b46dd19cfb890bf619837ca76a3c658e250d333e61f9c0" => :sierra
+    sha256 "834e7c5a597ad6aae95af9eb45eee848990f242d43deb8346896abb6e902a40e" => :mojave
+    sha256 "fbf8503780bbb221340f5ee8f0974b9fe63099fdfcc63b45eba545775837e9e8" => :high_sierra
+    sha256 "d19fed022810caf5a2abfb6b7dd8f4a515d0f2d9db721344a616efb8a7a7a688" => :sierra
   end
 
   keg_only :versioned_formula
@@ -28,6 +29,11 @@ class OpencvAT3 < Formula
   resource "contrib" do
     url "https://github.com/opencv/opencv_contrib/archive/3.4.5.tar.gz"
     sha256 "8f73d029887c726fed89c69a2b0fcb1d098099fcd81c1070e1af3b452669fbe2"
+  end
+
+  patch do
+    url "https://github.com/opencv/opencv/pull/14308.patch?full_index=1"
+    sha256 "c48a6a769f364e6f61bc99cf47a6e664c85246c9fcd4a201afc408158fc4f1ef"
   end
 
   def install

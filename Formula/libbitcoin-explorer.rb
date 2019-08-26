@@ -1,14 +1,13 @@
 class LibbitcoinExplorer < Formula
   desc "Bitcoin command-line tool"
   homepage "https://github.com/libbitcoin/libbitcoin-explorer"
-  url "https://github.com/libbitcoin/libbitcoin-explorer/archive/v3.5.0.tar.gz"
-  sha256 "630cffd577c0d10345b44ce8160f4604519b0ca69bf201f524f104c207b930aa"
-  revision 5
+  url "https://github.com/libbitcoin/libbitcoin-explorer/archive/v3.6.0.tar.gz"
+  sha256 "20c8ccc30b090309bee2b13a4b07f17ae6b16421dac804423f034c32dc1c518c"
 
   bottle do
-    sha256 "095134cfdfd0234fe22a5d6e5117be283d6fab1d1fb06ee65eb6edee960dccb4" => :mojave
-    sha256 "7b450208ae5663fa92865d09731b77941ff035d3eb45c57f082ffb362d21e601" => :high_sierra
-    sha256 "df2b96b4ff980cf4a0be3dc28aa908dc12d938ca21343d215fc79e1cc5c96cf4" => :sierra
+    sha256 "f1bdfac54c27695fd9f54ca3f44a1501a2ae006ed33cbca7ae6f80340459351a" => :mojave
+    sha256 "429b1eb703fc481d1866918302320bea542535c795fffeb3bb9192e6767f2bd9" => :high_sierra
+    sha256 "63186c9185d9b5b3daad3188a5bff986b41d1b5e24b7770f62ad13f88ab94891" => :sierra
   end
 
   depends_on "autoconf" => :build

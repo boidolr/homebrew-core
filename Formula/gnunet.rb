@@ -1,14 +1,14 @@
 class Gnunet < Formula
   desc "Framework for distributed, secure and privacy-preserving applications"
   homepage "https://gnunet.org/"
-  url "https://ftp.gnu.org/gnu/gnunet/gnunet-0.11.0.tar.gz"
-  sha256 "b7477a3c3b0d5e8a013685dc208cfb4ccee4145f8668faa8eb5b382af36c7e9a"
+  url "https://ftp.gnu.org/gnu/gnunet/gnunet-0.11.6.tar.gz"
+  sha256 "f8a07063b1e0890a1386fed2313a967f58f5495c075a25725aba200469c857bf"
 
   bottle do
     cellar :any
-    sha256 "75b4cf083ad9ea4eef073bc85d055ca77b132b11b7662dd551eef38bb98425f0" => :mojave
-    sha256 "c0741fe2c1022bab077c8c51bbd88d9b282d22d8397bea3a998230da36721741" => :high_sierra
-    sha256 "c9a15f3fef28fd1e6004829be29e85c14b66caf6b6c57596dd03909fa239f918" => :sierra
+    sha256 "88e4b7b5b5e022db9e02d4eaa0784aca48971fea93b16043bc7ae8326927431e" => :mojave
+    sha256 "c2c95aa8b1b3c17d164863ec853ea7e109072cbdeee61904e6eff7121a931f15" => :high_sierra
+    sha256 "ae1fa4e8cb8ccc335c2170f7ca180e2b5685836a869409e4774180319f53d9d4" => :sierra
   end
 
   depends_on "pkg-config" => :build
@@ -26,10 +26,6 @@ class Gnunet < Formula
   def install
     system "./configure", "--prefix=#{prefix}"
     system "make", "install"
-
-    # Move non executable script away from bin
-    mv bin/"gnunet-qr.py", pkgshare
-    inreplace bin/"gnunet-qr", bin, pkgshare
   end
 
   test do

@@ -1,14 +1,14 @@
 class AwsOkta < Formula
   desc "Authenticate with AWS using your Okta credentials"
   homepage "https://github.com/segmentio/aws-okta"
-  url "https://github.com/segmentio/aws-okta/archive/v0.19.5.tar.gz"
-  sha256 "dbcee4a2a6ed538c59b0ce4af9a09a486e69f060110c1d4500fdaf6785e76066"
+  url "https://github.com/segmentio/aws-okta/archive/v0.22.1.tar.gz"
+  sha256 "a70419d6b611c50c0c34eb5882753dfce6a5e1e1e025e828c07c8e3a8c3372a9"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "47418e61636aee18b43224b8eb273f42d25670c1fe0e9deb366f7292487e355f" => :mojave
-    sha256 "c9657ad4935bbbba5160731291a37f70a81f42965226d4066fff672b3cb83a5e" => :high_sierra
-    sha256 "d0add28c664f631588a7ee4859f9b2826122d3ed63cce35c08f5f5321ead43f7" => :sierra
+    sha256 "2ca3c390ba3215495011a77bd50d13a5dc8bf33e6f2a232c30376dc5e978f434" => :mojave
+    sha256 "397fea9c384c297d21ed0fc24036fb53cea6d22fe5ff3990e0d815273b61013a" => :high_sierra
+    sha256 "cdd9fa500d41e596ed973525f7a12cddf39da8e3cc766a27a9632c3626d7e6e9" => :sierra
   end
 
   depends_on "go" => :build

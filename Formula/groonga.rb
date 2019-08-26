@@ -1,13 +1,13 @@
 class Groonga < Formula
   desc "Fulltext search engine and column store"
   homepage "http://groonga.org/"
-  url "https://packages.groonga.org/source/groonga/groonga-9.0.0.tar.gz"
-  sha256 "c5d592e74a4f27fafdf636cf7fd7124a04b7b055cdb79d593b694c0ecd2686e7"
+  url "https://packages.groonga.org/source/groonga/groonga-9.0.6.tar.gz"
+  sha256 "874e14b409ced9559152cfdcce872503bd0501e1411174ed1ff0a486cf463734"
 
   bottle do
-    sha256 "0752b27e2bfe8d0e5d4da4f4133cc7260f3b2e80891b92c00d8b548ac86dd139" => :mojave
-    sha256 "bae2f7f9100ba28165b5de7be512d21bab42eda371bf44c85351f861f9346f5f" => :high_sierra
-    sha256 "08993714d930c438bcc727228469f0bda47c2e78690619763916f380234b621a" => :sierra
+    sha256 "c5a08c9c5c1f35633900d0550d9de72d558178f31744029c2a2b0d10b92b100a" => :mojave
+    sha256 "db13bde717b675a73b76c562aae19cc81fed11852c1e997fe44832dc5e4849a2" => :high_sierra
+    sha256 "c85aa86023bba853a3b854be9699d4e1b24d64355755ee71b2e7028255ecfc76" => :sierra
   end
 
   head do
@@ -29,8 +29,8 @@ class Groonga < Formula
   link_overwrite "lib/pkgconfig/groonga-normalizer-mysql.pc"
 
   resource "groonga-normalizer-mysql" do
-    url "https://packages.groonga.org/source/groonga-normalizer-mysql/groonga-normalizer-mysql-1.1.3.tar.gz"
-    sha256 "e4534c725de244f5da72b2b05ddcbf1cfb4e56e71ac40f01acae817adf90d72c"
+    url "https://packages.groonga.org/source/groonga-normalizer-mysql/groonga-normalizer-mysql-1.1.4.tar.gz"
+    sha256 "084a74742ba7cf396c617354fa58d691b0c22e1c5d1ddfc3722123d7161fcd96"
   end
 
   def install

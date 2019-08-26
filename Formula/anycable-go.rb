@@ -1,14 +1,14 @@
 class AnycableGo < Formula
   desc "Anycable Go WebSocket Server"
   homepage "https://github.com/anycable/anycable-go"
-  url "https://github.com/anycable/anycable-go/archive/v0.6.1.tar.gz"
-  sha256 "609e09d3f6f37900ee02590efe75e5792c1fda52bce4bbb4075d2523c8fbd3bf"
+  url "https://github.com/anycable/anycable-go/archive/v0.6.3.tar.gz"
+  sha256 "ac275a1120457a612a3058cfd7e1d5b7fe0a82d29b9bbe0eab45d9a87e1193a5"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "7135382ab3246162a827b707e4eb1b6197d061b06d83fc4b580b8e9bec8f3ca5" => :mojave
-    sha256 "5ee790ab1c455cb125e1c3a52e4cbb47426c6a5bd51f74f00853bebd75ed9523" => :high_sierra
-    sha256 "03f1dc7e44d72166e75de663a9506fb6de48d2c60a1331dc60d9184c4f884358" => :sierra
+    sha256 "c49295eaf552089dfed603b99f9e345a917f59954ecbf30b6f78692c73560743" => :mojave
+    sha256 "97cb84b35c1b36680e3179564f1ecb701d547e1eba520b5f411af572a4315088" => :high_sierra
+    sha256 "cf2d7d9ece830f8faacd8bddab20effce08293986e81164b84cc8d6dae01e321" => :sierra
   end
 
   depends_on "go" => :build

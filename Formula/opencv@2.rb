@@ -3,12 +3,12 @@ class OpencvAT2 < Formula
   homepage "https://opencv.org/"
   url "https://github.com/opencv/opencv/archive/2.4.13.7.tar.gz"
   sha256 "192d903588ae2cdceab3d7dc5a5636b023132c8369f184ca89ccec0312ae33d0"
-  revision 2
+  revision 4
 
   bottle do
-    sha256 "6580055d021fcabea83a3d2878cba7a6a7851fd2463f769e98138a099b3cc82d" => :mojave
-    sha256 "3ac9fdae51aea0627c1febfc25b7dc99b6f3832684b7c0e044a46aac771e02ac" => :high_sierra
-    sha256 "055e15f3b20df7f4db64f2d540e1a19e044edad5b33eb1f5980f747126142b5b" => :sierra
+    sha256 "d49ca7b231269d2cd1d036ae9e81a919bea30032503691fdea64670ab43ee701" => :mojave
+    sha256 "25b5f4313c5ec07952b26891d002c6584cc429d2b3487f597db97074c92d7112" => :high_sierra
+    sha256 "e7ded1e7d9985c96fe09e4440d90cdece9f62cd63f121a1ddc61ac17d35d522d" => :sierra
   end
 
   keg_only :versioned_formula

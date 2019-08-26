@@ -3,13 +3,13 @@ class Gdl < Formula
   homepage "https://developer.gnome.org/gdl/"
   url "https://download.gnome.org/sources/gdl/3.28/gdl-3.28.0.tar.xz"
   sha256 "52cc98ecc105148467b3b2b4e0d27ae484b1b6710d53413f771ed07ef1b737b6"
-  revision 1
+  revision 2
 
   bottle do
-    sha256 "5143863d01c94bc6eb765615922b302de5d73f8d3ea40982b9ad29b3221b7e19" => :mojave
-    sha256 "7395131d564a60d6b225c82f109403aa92bbc5f75a59eccd1ec3f98a13052f6f" => :high_sierra
-    sha256 "9267cd085c7e131ffb16b13a3c4f6b39ae5b3093fd16f77925263ea305b3536b" => :sierra
-    sha256 "c366de7b473f8af12cbb38b4a2fabbde7438d76915a8f06663ef1e0703548e6b" => :el_capitan
+    rebuild 1
+    sha256 "1a2e3b9fad14c8cdc47fbdf4ef7d232e1278c9921906da3b0458ae7f18e8370e" => :mojave
+    sha256 "6546a306e177da91fa227b130e8e26a721b5ec1abe61a825f203795cc4bf04b1" => :high_sierra
+    sha256 "6857bc228637ed35ee70f505d3e2881c73c4c85ff6da47d3b5e92bde89b9252e" => :sierra
   end
 
   depends_on "gobject-introspection" => :build
@@ -43,6 +43,7 @@ class Gdl < Formula
     gettext = Formula["gettext"]
     glib = Formula["glib"]
     gtkx3 = Formula["gtk+3"]
+    harfbuzz = Formula["harfbuzz"]
     libepoxy = Formula["libepoxy"]
     libpng = Formula["libpng"]
     pango = Formula["pango"]
@@ -58,6 +59,7 @@ class Gdl < Formula
       -I#{glib.opt_include}/glib-2.0
       -I#{glib.opt_lib}/glib-2.0/include
       -I#{gtkx3.opt_include}/gtk-3.0
+      -I#{harfbuzz.opt_include}/harfbuzz
       -I#{include}/libgdl-3.0
       -I#{libepoxy.opt_include}
       -I#{libpng.opt_include}/libpng16

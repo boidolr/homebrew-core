@@ -1,26 +1,33 @@
 class Etcd < Formula
   desc "Key value store for shared configuration and service discovery"
   homepage "https://github.com/etcd-io/etcd"
-  url "https://github.com/etcd-io/etcd/archive/v3.3.12.tar.gz"
-  sha256 "0452a98bd485d757fd85d2182f8eac8c2dad315bcb6cf29a797ced9e2669c413"
+  url "https://github.com/etcd-io/etcd.git",
+    :tag      => "v3.3.15",
+    :revision => "94745a4eed0425653b3b4275a208d38babceeaec"
   head "https://github.com/etcd-io/etcd.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "2d43653b282635230c278353d20371604daa844bdf23ccd57df5d245efa197fc" => :mojave
-    sha256 "a74726216e107deff2f0754783335a8f33f90e7ff44e70d1d12f187df2f73a9e" => :high_sierra
-    sha256 "ee5445e6c1303c285e3c631f9620186dd9f78dc2fdfb0ede12959ee6c8aa0ae5" => :sierra
+    rebuild 1
+    sha256 "d7392e41874580ea26cccda6130072f8c360f2f4e6871042e20b9e7484b85214" => :mojave
+    sha256 "4854e5c3bf7a4a4954b790113b926f6d5236807393fe275fccda37c4535d7f95" => :high_sierra
+    sha256 "aac21ebafe3c042aebb31f832c7909ecfa54e5123e0fbafb261a173556c4aea4" => :sierra
   end
 
   depends_on "go" => :build
 
   def install
+    ENV["GO111MODULE"] = "on"
     ENV["GOPATH"] = buildpath
-    mkdir_p "src/github.com/etcd-io"
-    ln_s buildpath, "src/github.com/etcd-io/etcd"
-    system "./build"
-    bin.install "bin/etcd"
-    bin.install "bin/etcdctl"
+
+    dir = buildpath/"src/github.com/etcd-io/etcd"
+    dir.install buildpath.children
+
+    cd dir do
+      system "go", "build", "-ldflags", "-X main.version=#{version}", "-o", bin/"etcd"
+      system "go", "build", "-ldflags", "-X main.version=#{version}", "-o", bin/"etcdctl", "etcdctl/main.go"
+      prefix.install_metafiles
+    end
   end
 
   plist_options :manual => "etcd"
@@ -51,6 +58,8 @@ class Etcd < Formula
   end
 
   test do
+    ENV["ETCDCTL_API"] = "3"
+
     begin
       test_string = "Hello from brew test!"
       etcd_pid = fork do
@@ -63,6 +72,9 @@ class Etcd < Formula
       curl_output = shell_output("curl --silent -L #{etcd_uri}")
       response_hash = JSON.parse(curl_output)
       assert_match(test_string, response_hash.fetch("node").fetch("value"))
+
+      assert_equal "OK\n", shell_output("#{bin}/etcdctl put foo bar")
+      assert_equal "foo\nbar\n", shell_output("#{bin}/etcdctl get foo 2>&1")
     ensure
       # clean up the etcd process before we leave
       Process.kill("HUP", etcd_pid)

@@ -1,14 +1,13 @@
 class LibbitcoinServer < Formula
   desc "Bitcoin Full Node and Query Server"
   homepage "https://github.com/libbitcoin/libbitcoin-server"
-  url "https://github.com/libbitcoin/libbitcoin-server/archive/v3.5.0.tar.gz"
-  sha256 "37ef8d572fb7400565655501ffdea5d07a1de10f3d9fa823d33e2bf68ef8c3ce"
-  revision 4
+  url "https://github.com/libbitcoin/libbitcoin-server/archive/v3.6.0.tar.gz"
+  sha256 "7280e6995f2a2123356e8ee6a5913f4a5fa6d0fd473ff2277145e55ba7104920"
 
   bottle do
-    sha256 "137557beba1a3119146037eb7a7f2bbac5a3403567ab7b502da5e642c491523a" => :mojave
-    sha256 "82951841b2e7704cc3923711bf7ef77a97c3d0582429e25ad20badbc16a4a8dc" => :high_sierra
-    sha256 "1a291e74db23b6a7489b554aeffa44f915f7cbc8604205c944b85180a1d2918f" => :sierra
+    sha256 "6aeaa77667d55c81618fae9f326036a8e748141cb542c8896d8030e9b9fd1a9e" => :mojave
+    sha256 "0bc088ef96cbf8e0278a0eea4936ffda9ce94ad0190d72c4da34e8a4d578f35a" => :high_sierra
+    sha256 "b14ca3951d8b5cd6d7285302c04932ed31d92e6eb822abfdc3300d8a2e72d4b0" => :sierra
   end
 
   depends_on "autoconf" => :build

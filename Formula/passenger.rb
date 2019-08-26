@@ -3,20 +3,25 @@ class Passenger < Formula
   homepage "https://www.phusionpassenger.com/"
   url "https://github.com/phusion/passenger/releases/download/release-6.0.2/passenger-6.0.2.tar.gz"
   sha256 "56b2273312e6dc9880f6ba83e381583b8759085a0b41338b782c9575d58346bc"
-  revision 1
+  revision 6
   head "https://github.com/phusion/passenger.git", :branch => "stable-6.0"
 
   bottle do
     cellar :any
-    sha256 "e2edabb892cdc821157fa271813e907b15cffda3ea2c4fd7f0c8988bbc6f1e0e" => :mojave
-    sha256 "99df6916b44f350c9a0e07af57ed8c4eb6cf5be2ecd055edaede21f82ce4f3ce" => :high_sierra
-    sha256 "26feea9c9ab93f7c3f7493532c2f980e16b75d07fcec8602d4d1713ca1563a62" => :sierra
+    sha256 "f6fecd45847e26076a17664eca4c17461aa27e9bf86e4035938d5a5656657d0c" => :mojave
+    sha256 "c588adafa44cf243eb7c849583de3d6c6b22246e35738168683d37f54371869a" => :high_sierra
+    sha256 "30d60520f6a7571108aeda76278e9485bbadc69a265a5ede90b353a83b744f97" => :sierra
   end
 
   # to build nginx module
   depends_on "nginx" => [:build, :test]
   depends_on "openssl"
   depends_on "pcre"
+
+  patch do
+    url "https://github.com/phusion/passenger/commit/09df7df0.patch?full_index=1"
+    sha256 "397707a788029f4abac4780d2e04ddba37ec9285b44c9d3e4ff0c91c5121d2b7"
+  end
 
   def install
     # https://github.com/Homebrew/homebrew-core/pull/1046

@@ -1,11 +1,11 @@
 class Ack < Formula
   desc "Search tool like grep, but optimized for programmers"
   homepage "https://beyondgrep.com/"
-  url "https://beyondgrep.com/ack-2.24-single-file"
-  sha256 "8361e5a2654bc575db27bfa40470c4182d74d51098d390944d98fe7cd5b20d49"
+  url "https://beyondgrep.com/ack-v3.0.2"
+  sha256 "8e49c66019af3a5bf5bce23c005231b2980e93889aa047ee54d857a75ab4a062"
 
   head do
-    url "https://github.com/petdance/ack2.git", :branch => "dev"
+    url "https://github.com/beyondgrep/ack3.git", :branch => "dev"
 
     resource "File::Next" do
       url "https://cpan.metacpan.org/authors/id/P/PE/PETDANCE/File-Next-1.16.tar.gz"
@@ -34,7 +34,7 @@ class Ack < Formula
       (bin/"ack").write_env_script("#{libexec}/ack", :PERL5LIB => ENV["PERL5LIB"])
       man1.install "blib/man1/ack.1"
     else
-      bin.install "ack-#{version.to_s.tr("-", "_")}-single-file" => "ack"
+      bin.install "ack-v#{version.to_s.tr("-", "_")}" => "ack"
       system "pod2man", "#{bin}/ack", "ack.1"
       man1.install "ack.1"
     end

@@ -1,14 +1,13 @@
 class LibbitcoinNode < Formula
   desc "Bitcoin Full Node"
   homepage "https://github.com/libbitcoin/libbitcoin-node"
-  url "https://github.com/libbitcoin/libbitcoin-node/archive/v3.5.0.tar.gz"
-  sha256 "e3a0a96155ca93aa6cba75789c18419f40686a69cbd40c77aa77ca84ccc43cab"
-  revision 3
+  url "https://github.com/libbitcoin/libbitcoin-node/archive/v3.6.0.tar.gz"
+  sha256 "3803e8dcf70dd1e7043e98bb4a78e9f2007288297f0046c5ed43c7a75058dcb5"
 
   bottle do
-    sha256 "c9b1947f45b07d9ed0f987f436da1218c1376e9c0c1881b9fc9775dc0f341c88" => :mojave
-    sha256 "cfdbcd04f58c8614146af6b1df27275f4a693c05cef28c6983577ed65c16cb99" => :high_sierra
-    sha256 "9770db643b8cc4411b2daba946b60520185b40233a01408ae7685bfb4e428c54" => :sierra
+    sha256 "168268e2f8f832fe1dca3b911c4b3e553bc028504107f60e682833b23f0547ed" => :mojave
+    sha256 "5be74517e2cca30a4224b6b1f2f50e20f8c55c09eb2d82e0a8c10a8e08ce822d" => :high_sierra
+    sha256 "e8e1cc3be334b9cc10502d54243299f07b349a2314e692e68a0a351e9c4c3b52" => :sierra
   end
 
   depends_on "autoconf" => :build

@@ -1,13 +1,13 @@
 class Php < Formula
   desc "General-purpose scripting language"
-  homepage "https://secure.php.net/"
-  url "https://php.net/get/php-7.3.3.tar.xz/from/this/mirror"
-  sha256 "6bb03e79a183d0cb059a6d117bbb2e0679cab667fb713a13c6a16f56bebab9b3"
+  homepage "https://www.php.net/"
+  url "https://www.php.net/distributions/php-7.3.8.tar.xz"
+  sha256 "f6046b2ae625d8c04310bda0737ac660dc5563a8e04e8a46c1ee24ea414ad5a5"
 
   bottle do
-    sha256 "401b2509e36a73979a2f67e6b133c5d0118a1d995cfb62a27e8ed4d24ccd1559" => :mojave
-    sha256 "8330fac222c9b40500b338882a358a7159c64a152f80dd4a64ab07203993c046" => :high_sierra
-    sha256 "a2b1b28dedbe2df9a09c611a0c46c7293c2e72d310d76871f36c9d4f9bbabdd6" => :sierra
+    sha256 "4c5881144895dfdd159a0a9381487dc4e752ee9bf5c7d289db92f1ae80906b15" => :mojave
+    sha256 "8a8a1296f42f350c2c189618bf0b4416ba967d84d2ac5a269b2bd3172934c87c" => :high_sierra
+    sha256 "bf796b6b68efc6a0cebca1b8aa7b20b5cfd06a9d96ddf6ea000805ac4acc9307" => :sierra
   end
 
   depends_on "httpd" => [:build, :test]
@@ -169,6 +169,17 @@ class Php < Formula
     inreplace bin/"php-config", lib/"php", prefix/"pecl"
     inreplace "php.ini-development", %r{; ?extension_dir = "\./"},
       "extension_dir = \"#{HOMEBREW_PREFIX}/lib/php/pecl/#{orig_ext_dir}\""
+
+    # Use OpenSSL cert bundle
+    inreplace "php.ini-development", /; ?openssl\.cafile=/,
+      "openssl.cafile = \"#{HOMEBREW_PREFIX}/etc/openssl/cert.pem\""
+    inreplace "php.ini-development", /; ?openssl\.capath=/,
+      "openssl.capath = \"#{HOMEBREW_PREFIX}/etc/openssl/certs\""
+
+    # php 7.3 known bug
+    # SO discussion: https://stackoverflow.com/a/53709484/791609
+    # bug report: https://bugs.php.net/bug.php?id=77260
+    inreplace "php.ini-development", ";pcre.jit=1", "pcre.jit=0"
 
     config_files = {
       "php.ini-development"   => "php.ini",

@@ -1,15 +1,15 @@
 class Boost < Formula
   desc "Collection of portable C++ source libraries"
   homepage "https://www.boost.org/"
-  url "https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.bz2"
-  sha256 "8f32d4617390d1c2d16f26a27ab60d97807b35440d45891fa340fc2648b04406"
+  url "https://dl.bintray.com/boostorg/release/1.70.0/source/boost_1_70_0.tar.bz2"
+  sha256 "430ae8354789de4fd19ee52f3b1f739e1fba576f0aded0897c3c2bc00fb38778"
   head "https://github.com/boostorg/boost.git"
 
   bottle do
     cellar :any
-    sha256 "ffd50072d4f4f59c5e0d55e2bc44430bb38d2272279ce4bc944b784915138c42" => :mojave
-    sha256 "d11d9cf367df6ec274385fea0cafc9d484a2036e19437ae9a67b82da75979a6a" => :high_sierra
-    sha256 "35809d731353341b017e78dc21d396b4a05cc8c3f7cb86abbd98e22af092ffef" => :sierra
+    sha256 "c626b90770424ca969d0870d25d7fb13cf9d4f23a828407701face0e7ec4ac93" => :mojave
+    sha256 "8d5a7c95155faf57ce246d3455cea3628569d684a14fb9e621893ceaf3d65373" => :high_sierra
+    sha256 "0578344e152f306a4594b72493dcc3f638425b0fb7f4fcd23e5a523c4542b33a" => :sierra
   end
 
   depends_on "icu4c"
@@ -38,6 +38,8 @@ class Boost < Formula
     bootstrap_args << "--without-libraries=#{without_libraries.join(",")}"
 
     # layout should be synchronized with boost-python and boost-mpi
+    #
+    # --no-cmake-config should be dropped if possible in next version
     args = %W[
       --prefix=#{prefix}
       --libdir=#{lib}
@@ -45,7 +47,9 @@ class Boost < Formula
       -j#{ENV.make_jobs}
       --layout=tagged-1.66
       --user-config=user-config.jam
+      --no-cmake-config
       -sNO_LZMA=1
+      -sNO_ZSTD=1
       install
       threading=multi,single
       link=shared,static

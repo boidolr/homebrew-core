@@ -1,15 +1,15 @@
 class Wxmaxima < Formula
   desc "Cross platform GUI for Maxima"
   homepage "https://wxmaxima-developers.github.io/wxmaxima/"
-  url "https://github.com/wxMaxima-developers/wxmaxima/archive/Version-19.01.0.tar.gz"
-  sha256 "f28dfc9a717e4a91446cddba0e010c4383a3e973a11889948bd65ea311df28fc"
+  url "https://github.com/wxMaxima-developers/wxmaxima/archive/Version-19.08.0.tar.gz"
+  sha256 "df69f681bbad5ab7c7c3832a6da01e1523e3d42156a1b61e7344e0b6b6f6d24f"
   head "https://github.com/wxMaxima-developers/wxmaxima.git"
 
   bottle do
     cellar :any
-    sha256 "f5a15066c3fd57ca50ded8ffd4cfa12a3682b4b10ac91a662335db7393984b34" => :mojave
-    sha256 "18a9745082353eb1d965c6b8bf7d05933dda1003e9c0bd20271c6308e00d0ea0" => :high_sierra
-    sha256 "254b2260c87f83859b8f50469fa0ae657fbb310985382c2f0db708901620648f" => :sierra
+    sha256 "e56fb2634376e8f5b0d210b3d35f41ebeb6efc721f798d9a037ac3fb82c98fcf" => :mojave
+    sha256 "90206d0b1ae9ecd436f79b9a9a24f6c25ad34bd6bff8f083ccdbfcdbf93e3c0e" => :high_sierra
+    sha256 "05afed0a5f13840a11eed5b9d6d3bc5564194631bf909b4dc9b5e218a0ec216a" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -34,6 +34,6 @@ class Wxmaxima < Formula
   end
 
   test do
-    assert_match "algebra", shell_output("#{bin}/wxmaxima --help 2>&1", 255)
+    assert_match "algebra", shell_output("#{bin}/wxmaxima --help 2>&1")
   end
 end

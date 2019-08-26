@@ -1,13 +1,13 @@
 class Httpd < Formula
   desc "Apache HTTP server"
   homepage "https://httpd.apache.org/"
-  url "https://www.apache.org/dyn/closer.cgi?path=httpd/httpd-2.4.38.tar.bz2"
-  sha256 "7dc65857a994c98370dc4334b260101a7a04be60e6e74a5c57a6dee1bc8f394a"
+  url "https://www.apache.org/dyn/closer.cgi?path=/httpd/httpd-2.4.41.tar.bz2"
+  sha256 "133d48298fe5315ae9366a0ec66282fa4040efa5d566174481077ade7d18ea40"
 
   bottle do
-    sha256 "dd630fc8d917c4f623f9d1141af574ae51f9b2a0c89611f5c31069bacecf8c7b" => :mojave
-    sha256 "ff5507ee926c69c828de1f281f221c1a90aa1645f56b2f86d6e25204b8dfd9b8" => :high_sierra
-    sha256 "9cdc6f8b1d45437c12f9006ab720a5b189b65f2e05018b6eb96a3a0e4752fd51" => :sierra
+    sha256 "69fa9c4f5ac1da302f5784353ca75fe9d20d09d62308f9dd12565c427c5bb7e1" => :mojave
+    sha256 "9c9816bc486b000a783c1dfc09a512828017b659a211bd0db646f47be5c5db26" => :high_sierra
+    sha256 "ba090084dbd0d52085e95af10b1b8fe0b492ab41d4589104bcae5b10fd6d4381" => :sierra
   end
 
   depends_on "apr"
@@ -16,6 +16,7 @@ class Httpd < Formula
   depends_on "nghttp2"
   depends_on "openssl"
   depends_on "pcre"
+  uses_from_macos "zlib"
 
   def install
     # fixup prefix references in favour of opt_prefix references

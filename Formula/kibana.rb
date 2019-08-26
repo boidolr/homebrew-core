@@ -2,25 +2,25 @@ class Kibana < Formula
   desc "Analytics and search dashboard for Elasticsearch"
   homepage "https://www.elastic.co/products/kibana"
   url "https://github.com/elastic/kibana.git",
-      :tag      => "v6.6.1",
-      :revision => "c0c81857d435f499ec2514d9a4823e3dc87021bd"
+      :tag      => "v6.8.2",
+      :revision => "f027fad862817a52175b9ad2663e5126b9bad428"
   head "https://github.com/elastic/kibana.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "b81118c51f28c1e81f7d7f5c8f877cd99dbe326097a708a0cc8e74846f97e5c6" => :mojave
-    sha256 "464f75ac0c65ce73ae63cdda6bbc8ec2f75954d0ce69a6a6eb231c4cdfb4a37f" => :high_sierra
-    sha256 "45c0c5ba49ea0156e4d35de48cd3640c3f60a8fea5add218b563f3adf13f20ef" => :sierra
+    sha256 "7a2c8d25f188d3d6c0127b52ccf261ea924f865e0d1b1417dd3a6d727d1828b9" => :mojave
+    sha256 "e9554d0a464711f10572baccca5ad887d48f558aea119ed65f87c69b726e1378" => :high_sierra
+    sha256 "d5a78f410e3455924a9922c2b2fea0b46d4d809def59141fe6ede8aaff949345" => :sierra
   end
 
   resource "node" do
-    url "https://nodejs.org/dist/v10.15.1/node-v10.15.1.tar.xz"
-    sha256 "1a55f7b9fb80442182d9e1eba4fca4dac3c781cdcb25d6be37b24d253f61c858"
+    url "https://nodejs.org/dist/v10.15.2/node-v10.15.2.tar.xz"
+    sha256 "b8bb2da7cb016e895bc2f70009a420f6b8d519e66548624b6130bbfbd5118c59"
   end
 
   resource "yarn" do
-    url "https://yarnpkg.com/downloads/1.13.0/yarn-v1.13.0.tar.gz"
-    sha256 "125d40ebf621ebb08e3f66a618bd2cc5cd77fa317a312900a1ab4360ed38bf14"
+    url "https://yarnpkg.com/downloads/1.16.0/yarn-v1.16.0.tar.gz"
+    sha256 "df202627d9a70cf09ef2fb11cb298cb619db1b958590959d6f6e571b50656029"
   end
 
   def install

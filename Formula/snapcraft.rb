@@ -3,14 +3,14 @@ class Snapcraft < Formula
 
   desc "Package any app for every Linux desktop, server, cloud or device"
   homepage "https://snapcraft.io/"
-  url "https://files.pythonhosted.org/packages/fc/c6/d3a59d1f08c0b8bc3d166bc6e0a26a29dd61627d2e6266bd81b26fc02142/snapcraft-3.0.1.tar.gz"
-  sha256 "c9914324749502dff5588f72a93ee05d47b14f2bd400d6234a4e2db22fd6922c"
+  url "https://github.com/snapcore/snapcraft/archive/3.7.2.tar.gz"
+  sha256 "df11f0ba80efff5fee6c397d38c4aa8a7816b0b1629c4f0e84c3776520340ffe"
 
   bottle do
     cellar :any
-    sha256 "6b767bebc6a392621605477f6c6f0ef8ea8e264a4a7f3e53893c0eb9ded66a8b" => :mojave
-    sha256 "77a9f5b2fd096c878cf6e2d9de1e26cbc98603014c41640c491f48a68ca0eed0" => :high_sierra
-    sha256 "082b37eb35d4e2a00836150d1324df9eb1a55d2729febb51417bfde9352cbfe9" => :sierra
+    sha256 "f0c6d4c0571821bffc5ec388c09e11511a4b8352d606553f155d08608502fa1d" => :mojave
+    sha256 "bbad8eab86b13c770c6ed3a0e52342d2396d1653f2bebb7a7b45985ffe34fd40" => :high_sierra
+    sha256 "adff1c1ce0876ee58b6b0c7d9b9af78d0614f06d2e21ed0800f8dcb6a7ff8943" => :sierra
   end
 
   depends_on "libsodium"
@@ -18,6 +18,7 @@ class Snapcraft < Formula
   depends_on "lxc"
   depends_on "python"
   depends_on "squashfs"
+  depends_on "xdelta"
 
   resource "certifi" do
     url "https://files.pythonhosted.org/packages/15/d4/2f888fc463d516ff7bf2379a4e9a552fef7f22a94147655d9b1097108248/certifi-2018.1.18.tar.gz"
@@ -35,8 +36,8 @@ class Snapcraft < Formula
   end
 
   resource "click" do
-    url "https://files.pythonhosted.org/packages/95/d9/c3336b6b5711c3ab9d1d3a80f1a3e2afeb9d8c02a7166462f6cc96570897/click-6.7.tar.gz"
-    sha256 "f15516df478d5a56180fbf80e68f206010e6d160fc39fa508b65e035fd75130b"
+    url "https://files.pythonhosted.org/packages/f8/5c/f60e9d8a1e77005f664b76ff8aeaee5bc05d0a91798afd7f53fc998dbc47/Click-7.0.tar.gz"
+    sha256 "5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"
   end
 
   resource "configparser" do
@@ -64,9 +65,19 @@ class Snapcraft < Formula
     sha256 "c58390b0d191db948fc9ab681f07fdfce2a573cd012356bada47d56795d00ee2"
   end
 
+  resource "pbr" do
+    url "https://files.pythonhosted.org/packages/81/80/1df9176f9021c588155d0c7a86f1e963cec77fefa31934bc380acb0dbd5e/pbr-5.4.2.tar.gz"
+    sha256 "9b321c204a88d8ab5082699469f52cc94c5da45c51f114113d01b3d993c24cdf"
+  end
+
   resource "petname" do
     url "https://files.pythonhosted.org/packages/b8/6c/3b5c55a6632771b6a3ffc46ebb1d01bd7d2ca7ce3b44ebfd3c6ceeb9a6f6/petname-2.2.tar.gz"
     sha256 "be1da50a6aa01e39840e9a4b79b527a333b256733cb681f52669c08df7819ace"
+  end
+
+  resource "pylxd" do
+    url "https://files.pythonhosted.org/packages/42/4f/39c3614b91f0b9e8ba757d2bacb13b356b5c8d0f6be1fdebbc2b795ae831/pylxd-2.2.9.tar.gz"
+    sha256 "2bd5ce9c258d495312cf9f9e1b392ad6d1d40b7dd2a35a789e2cceb2bef184cc"
   end
 
   resource "progressbar33" do

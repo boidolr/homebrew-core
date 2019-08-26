@@ -3,13 +3,13 @@ class Gnuradio < Formula
   homepage "https://gnuradio.org/"
   url "https://gnuradio.org/releases/gnuradio/gnuradio-3.7.13.4.tar.gz"
   sha256 "c536c268b1e9c24f1206bbc881a5819ac46e662f4e8beaded6f3f441d3502f0d"
-  revision 5
+  revision 8
   head "https://github.com/gnuradio/gnuradio.git"
 
   bottle do
-    sha256 "0e0f6963f6cbbbcd84e9abf35304c11dd256357b3a4ad0609dbdecb9eeaa4742" => :mojave
-    sha256 "f75a8d702859c08319368c6d17989a835c61bcc8f6f3f109b5780bbe20dc8a22" => :high_sierra
-    sha256 "dc2eede0f815fd6adf05aaf375bacd30a9aac5dc85570dc4b65271be6ff3b175" => :sierra
+    sha256 "f6a825a3f92199404a18ed536bc57450d7b6277a7c8027d26ca387cf766f9248" => :mojave
+    sha256 "251237430e4e9365e312ab58b0766c76f5d77c56abf16cae5eb9316f84d7f38a" => :high_sierra
+    sha256 "db062257f2f9bebe0b31a33891e952790422cc13ed5276fc29833bdcbf7ac12b" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -61,6 +61,12 @@ class Gnuradio < Formula
   resource "cppzmq" do
     url "https://raw.githubusercontent.com/zeromq/cppzmq/46fc0572c5e9f09a32a23d6f22fd79b841f77e00/zmq.hpp"
     sha256 "964031c0944f913933f55ad1610938105a6657a69d1ac5a6dd50e16a679104d5"
+  end
+
+  # patch for boost 1.70.0, remove after next release
+  patch do
+    url "https://github.com/gnuradio/gnuradio/commit/6dc8229fd0dda25c054c2194ee2c9b28affe92d8.patch?full_index=1"
+    sha256 "9836235ea69b3d66b5cd4b2cdc89f80d010797d2bd59dc5c6631a96af921db8c"
   end
 
   def install

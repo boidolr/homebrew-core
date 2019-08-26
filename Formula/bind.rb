@@ -1,14 +1,22 @@
 class Bind < Formula
   desc "Implementation of the DNS protocols"
   homepage "https://www.isc.org/downloads/bind/"
-  url "https://ftp.isc.org/isc/bind9/9.12.4/bind-9.12.4.tar.gz"
-  sha256 "81bf24b2b86f7288ccf727aff59f1d752cc3e9de30a7480d24d67736256a0d53"
+
+  # BIND releases with even minor version numbers (9.14.x, 9.16.x, etc) are
+  # stable. Odd-numbered minor versions are for testing, and can be unstable
+  # or buggy. They are not suitable for general deployment. We have to use
+  # "version_scheme" because someone upgraded to 9.15.0, and required a
+  # downgrade.
+
+  url "https://ftp.isc.org/isc/bind/9.14.5/bind-9.14.5.tar.gz"
+  sha256 "12d0672cb83d985b57038ce7eb8a71c6bc7ebd379d67109c5f966f7527988045"
+  version_scheme 1
   head "https://gitlab.isc.org/isc-projects/bind9.git"
 
   bottle do
-    sha256 "d82db03a139392f57129bd79b1ea2539976d78474e12783672a938beb52ade6a" => :mojave
-    sha256 "a5fdca7936ef8bd8b4bc816529b9410d366c077969e4719c44044094ba5d59e0" => :high_sierra
-    sha256 "a772621d02fa39eed580232b8b769414e946168e40d096cf03853fb3f0cb79d0" => :sierra
+    sha256 "80f38a4640db669967233f621c0ed90e334bc9d3a7a7d00b56370c87baaaaf3c" => :mojave
+    sha256 "851e1bb2309c0cb022ecf0e3d44ddce3005d5d65085812278196a48354b1cad2" => :high_sierra
+    sha256 "a4d170c0b37764735530403dae4a3f51ff9447366f965813049b9ec8dce2d66e" => :sierra
   end
 
   depends_on "json-c"
@@ -22,7 +30,8 @@ class Bind < Formula
 
   def install
     xy = Language::Python.major_minor_version "python3"
-    ENV.prepend_create_path "PYTHONPATH", libexec/"vendor/lib/python#{xy}/site-packages"
+    vendor_site_packages = libexec/"vendor/lib/python#{xy}/site-packages"
+    ENV.prepend_create_path "PYTHONPATH", vendor_site_packages
     resources.each do |r|
       r.stage do
         system "python3", *Language::Python.setup_install_args(libexec/"vendor")
@@ -34,17 +43,12 @@ class Bind < Formula
       ENV["SDKROOT"] = MacOS.sdk_path
     end
 
-    # enable DNSSEC signature chasing in dig
-    ENV["STD_CDEFINES"] = "-DDIG_SIGCHASE=1"
-
     system "./configure", "--prefix=#{prefix}",
-                          "--enable-threads",
-                          "--enable-ipv6",
                           "--with-openssl=#{Formula["openssl"].opt_prefix}",
-                          "--with-libjson=#{Formula["json-c"].opt_prefix}"
+                          "--with-libjson=#{Formula["json-c"].opt_prefix}",
+                          "--with-python=#{Formula["python"].opt_bin}/python3",
+                          "--with-python-install-dir=#{vendor_site_packages}"
 
-    # From the bind9 README: "Do not use a parallel "make"
-    ENV.deparallelize
     system "make"
     system "make", "install"
 

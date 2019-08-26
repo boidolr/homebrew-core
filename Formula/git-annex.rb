@@ -5,18 +5,19 @@ class GitAnnex < Formula
 
   desc "Manage files with git without checking in file contents"
   homepage "https://git-annex.branchable.com/"
-  url "https://hackage.haskell.org/package/git-annex-7.20181121/git-annex-7.20181121.tar.gz"
-  sha256 "d044f0557cc85ed664423ed5bc20e767bd796f6ffd32d3bf39b8a59cc7b7cb1d"
+  url "https://hackage.haskell.org/package/git-annex-7.20190819/git-annex-7.20190819.tar.gz"
+  sha256 "9e794baf81f3fcc0359ec9c0f22f5d5cad1ea9446958e53acafe747c48ef7ebb"
   head "git://git-annex.branchable.com/"
 
   bottle do
-    sha256 "2dd3ed2ba23afc4a47ce43dd0ef88c17691ec03f5cfd9c0fc851f77345b4eeca" => :mojave
-    sha256 "dc077598afef126a61fba944aef799de03f91799f0975921c8097d0c7f1c56d1" => :high_sierra
-    sha256 "581d2b1ab2b844f9f87da719898e513e77c9f4cee1d1e36a7ab0e944e5592029" => :sierra
+    cellar :any
+    sha256 "3fa013225498b0903e4c402054849129ce584dbe63f57b3863cc7483650bb635" => :mojave
+    sha256 "c4e0b3e3feb6472f59ea792890c8e30702cf4ea5bc506048ceab3cbf29a14cfc" => :high_sierra
+    sha256 "372ef1a30123f02263e003ba6b2f71daa139105890e875b02a1fda24a7388d2e" => :sierra
   end
 
   depends_on "cabal-install" => :build
-  depends_on "ghc@8.2" => :build
+  depends_on "ghc" => :build
   depends_on "pkg-config" => :build
   depends_on "gsasl"
   depends_on "libmagic"
@@ -28,8 +29,8 @@ class GitAnnex < Formula
     # This is already resolved in aws 0.20 but we can't move to 0.20 until
     # esqueleto 2.6.0 ships. See https://github.com/bitemyapp/esqueleto/issues/88
     # The network 2.7.0.1 issue has been fixed upstream but needs a new release.
-    install_cabal_package "--constraint", "http-conduit<2.3",
-                          "--constraint", "network<2.7.0.1",
+    install_cabal_package "--constraint", "http-conduit>=2.3",
+                          "--constraint", "network>=2.6.3.0",
                           :using => ["alex", "happy", "c2hs"],
                           :flags => ["s3", "webapp"]
     bin.install_symlink "git-annex" => "git-annex-shell"
@@ -69,7 +70,7 @@ class GitAnnex < Formula
     system "git", "annex", "init"
     (testpath/"Hello.txt").write "Hello!"
     assert !File.symlink?("Hello.txt")
-    assert_match "add Hello.txt ok", shell_output("git annex add .")
+    assert_match /^add Hello.txt.*ok.*\(recording state in git\.\.\.\)/m, shell_output("git annex add .")
     system "git", "commit", "-a", "-m", "Initial Commit"
     assert File.symlink?("Hello.txt")
 

@@ -1,22 +1,23 @@
 class Synfig < Formula
   desc "Command-line renderer"
   homepage "https://synfig.org/"
-  url "https://downloads.sourceforge.net/project/synfig/releases/1.0.2/source/synfig-1.0.2.tar.gz"
-  sha256 "34cdf9eac90aadea29fb2997e82da1c32713ab02940f7c8873330f894e167fb4"
-  revision 5
+  url "https://downloads.sourceforge.net/project/synfig/releases/1.2.2/source/synfig-1.2.2.tar.gz"
+  sha256 "5f5f7b33483041165f9a63fe4d95eb815971c7444569e574206f6964e83cc2ef"
+  revision 1
   head "https://svn.code.sf.net/p/synfig/code/"
 
   bottle do
-    sha256 "7051446f2836f7de2f71508639cd7e82de5b71013e55801124f6e5ecf426cca4" => :mojave
-    sha256 "2f05123f7d5b6cd2d2e0ae7ba1bb070e5bf5bd69f71a85553ea45858ea18b7ab" => :high_sierra
-    sha256 "ef83f8b014f601eeed4e7810d5edd5c41838ef0cf7df918674aa8975a670bcb7" => :sierra
-    sha256 "42f7ab274f30645bd06e707a9e7962cabf7ba8766728c781e066efa2cd1a53ac" => :el_capitan
+    sha256 "272749e10c523b22a622c9274578260758746c02393463183af2d7073ec33680" => :mojave
+    sha256 "67861e53e6149a25b1fc0aa3c576e33bb55de48a0f15fc74fa0f95be92ff94ad" => :high_sierra
+    sha256 "397224ae5e322f167d9ba42e8b8ea21e86db4a7c9ec3a439d8093430a4c1c538" => :sierra
   end
 
+  depends_on "intltool" => :build
   depends_on "pkg-config" => :build
   depends_on "boost"
   depends_on "cairo"
   depends_on "etl"
+  depends_on "fftw"
   depends_on "freetype"
   depends_on "gettext"
   depends_on "libpng"
@@ -26,12 +27,6 @@ class Synfig < Formula
   depends_on "mlt"
   depends_on "openexr"
   depends_on "pango"
-
-  # bug filed upstream as https://synfig.org/issues/thebuggenie/synfig/issues/904
-  patch do
-    url "https://gist.githubusercontent.com/tschoonj/06d5de3cdc5d063f8612/raw/26fe46b6eedeecdc686b9fd5aac01de9f2756424/synfig.diff"
-    sha256 "0ac5b757ba3dda6a863a79e717fc239648c490eac1e643ff275b8ac232a466a3"
-  end
 
   def install
     ENV.cxx11

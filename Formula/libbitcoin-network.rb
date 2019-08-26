@@ -1,15 +1,14 @@
 class LibbitcoinNetwork < Formula
   desc "Bitcoin P2P Network Library"
   homepage "https://github.com/libbitcoin/libbitcoin-network"
-  url "https://github.com/libbitcoin/libbitcoin-network/archive/v3.5.0.tar.gz"
-  sha256 "e065bd95f64ad5d7b0f882e8759f6b0f81a5fb08f7e971d80f3592a1b5aa8db4"
-  revision 2
+  url "https://github.com/libbitcoin/libbitcoin-network/archive/v3.6.0.tar.gz"
+  sha256 "4e85194d9d035eea8ca1c8088b367342bc230473d019ef9756a59da97c2c500d"
 
   bottle do
     cellar :any
-    sha256 "c79dc254d19776a3e85bd2d4ad63ab75db8bfff9ac8639d06d4187d3a38b5671" => :mojave
-    sha256 "9f60dc599d36735d8efb2ed8a80d36a0b627245bed72cfe02928f089277dd5c0" => :high_sierra
-    sha256 "e79508318fa5236f5a51142db09e089bc695d68cf7453b3b915b0603a7f480a8" => :sierra
+    sha256 "c1c9981dacee0b9f10bfde83cf55f5a301b2a310ce1f4f0ca7d737f41cab9980" => :mojave
+    sha256 "c8ac3448d551ec0b92a20f3a4d5ed2393cec041e2e4d2fca56ff2e3c4ce8b2f6" => :high_sierra
+    sha256 "2184821f86e8c811bd4546b7a6829448f580d533472bc85e7cf2b2d304236392" => :sierra
   end
 
   depends_on "autoconf" => :build

@@ -1,14 +1,13 @@
 class Znc < Formula
   desc "Advanced IRC bouncer"
   homepage "https://wiki.znc.in/ZNC"
-  url "https://znc.in/releases/archive/znc-1.7.1.tar.gz"
-  sha256 "44cfea7158ea05dc2547c7c6bc22371e66c869def90351de0ab90a9c200d39c4"
-  revision 1
+  url "https://znc.in/releases/archive/znc-1.7.4.tar.gz"
+  sha256 "b1a32921a8e6d79ee6c5900c8d07293026966db7c05aaac48984231befc49b71"
 
   bottle do
-    sha256 "29762087ad3267dd6b7164aad34e6cbe6316efe0d5d858b6bb20405b89f37e05" => :mojave
-    sha256 "3fbeaad6f7f86d78aee001eb16f1093fa40a88cc9ccd4da4f29a35b06912d1e1" => :high_sierra
-    sha256 "b3bd651781f249b40cced788e3322a9ae09fd78d31ebd3bbfba073dd35666793" => :sierra
+    sha256 "fb0f39471e6ff4f4a421e29a11374046f047e209187944d9451761238bc05300" => :mojave
+    sha256 "65bd2fa1bf794eada4cfcafe86b410d23c5d22cbc5a0bf731dfa5e8ef0118ba1" => :high_sierra
+    sha256 "b977dcff0d2d873a463e49b9807ef19203a854a5a67feb398cd168b75a702952" => :sierra
   end
 
   head do

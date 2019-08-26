@@ -3,12 +3,13 @@ class Rmlint < Formula
   homepage "https://github.com/sahib/rmlint"
   url "https://github.com/sahib/rmlint/archive/v2.8.0.tar.gz"
   sha256 "196bb595ac4d3d1a76ed62542b7895bda1cea47f0f77483286b2dfc8fc797253"
+  revision 1
 
   bottle do
     cellar :any
-    sha256 "868fb80acb784a7634e5c7fe6e75cee86d4c93615213156f0d97a22c3e27d0e6" => :mojave
-    sha256 "fa8f2ebb9224446dcf5dfbaca94f97bfe983a10888dd0d514345643c0394fd70" => :high_sierra
-    sha256 "a0987dfb0b23a5e3f5a93bb93480834cdf2e54c046784af3ba2c191336905e88" => :sierra
+    sha256 "552eeef7ab480b1a69fb3edbf9b7f05d7a267c732821ecc157f4faa422cee68b" => :mojave
+    sha256 "8ea97a4b0511e8284ec45c4f9fdc8e52a1a7166c432ca572b42ac8c1e51c3c30" => :high_sierra
+    sha256 "dc10a001e94ed01f24d6b7c60eabb981f3c04dabef0943090b5f77fcb0f136ae" => :sierra
   end
 
   depends_on "gettext" => :build
@@ -21,7 +22,7 @@ class Rmlint < Formula
 
   def install
     system "scons", "config"
-    scons
+    system "scons"
     bin.install "rmlint"
     man1.install "docs/rmlint.1.gz"
   end

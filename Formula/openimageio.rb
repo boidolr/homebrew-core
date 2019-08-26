@@ -1,15 +1,14 @@
 class Openimageio < Formula
   desc "Library for reading, processing and writing images"
-  homepage "http://openimageio.org/"
-  url "https://github.com/OpenImageIO/oiio/archive/Release-1.8.17.tar.gz"
-  sha256 "a019086c05a6150d445a2240bab1723dff540dde5f5c327c36a97f0b5ae0e157"
-  revision 2
+  homepage "https://openimageio.org/"
+  url "https://github.com/OpenImageIO/oiio/archive/Release-2.0.9.tar.gz"
+  sha256 "0cc7f8db831482ada4f7c7f97859eb4db6b0fc3626100f94a89053da1e1a8615"
   head "https://github.com/OpenImageIO/oiio.git"
 
   bottle do
-    sha256 "65406c18cdbecb12f3f2b600cad32f733a0dbab614a9064d0e704327be8a8851" => :mojave
-    sha256 "6e4be085f5c001712012491997bd0aa342a56425149d209306b0a41ca5843d65" => :high_sierra
-    sha256 "5fb116e69effaea3ed5de0b7e3121b43c757d3b4a85f4a85661e82fbbdce4981" => :sierra
+    sha256 "664be2c9f461520db7e819e7e292322a8c7f78d2ea812a93a9dd0af1773246dd" => :mojave
+    sha256 "aef61a8a303c28e741fd386c65beeb7c9cc5f5550907e6a1272e6760d1b41de7" => :high_sierra
+    sha256 "50b2a09818555b325ab9f20f6ce00cde23efffe90a79c20f6d6338d2899e4810" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -31,9 +30,8 @@ class Openimageio < Formula
   depends_on "webp"
 
   def install
-    # -DUSE_OPENSSL=OFF can be removed in 1.9, see
-    # https://github.com/Homebrew/homebrew-core/pull/22522#issuecomment-364831533
     args = std_cmake_args + %w[
+      -DCCACHE_FOUND=
       -DEMBEDPLUGINS=ON
       -DUSE_FIELD3D=OFF
       -DUSE_JPEGTURBO=OFF
@@ -41,7 +39,6 @@ class Openimageio < Formula
       -DUSE_OPENCV=OFF
       -DUSE_OPENGL=OFF
       -DUSE_OPENJPEG=OFF
-      -DUSE_OPENSSL=OFF
       -DUSE_PTEX=OFF
       -DUSE_QT=OFF
     ]

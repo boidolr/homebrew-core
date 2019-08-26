@@ -1,14 +1,14 @@
 class Mongoose < Formula
   desc "Web server build on top of Libmongoose embedded library"
   homepage "https://github.com/cesanta/mongoose"
-  url "https://github.com/cesanta/mongoose/archive/6.13.tar.gz"
-  sha256 "ec7956b8f2845f6c22e19ab38a0c32c9b379087f0038c7db661b34812f225911"
+  url "https://github.com/cesanta/mongoose/archive/6.15.tar.gz"
+  sha256 "ed9b44690f9660d25562e45472d486c086bcc916bf49f39f22e0a90444d44454"
 
   bottle do
     cellar :any
-    sha256 "00e7662046f84e6e48ddecf56f471bd7c2a5acdbcc919ead7c5457a1126617dd" => :mojave
-    sha256 "a98aaf1726ab5402dc2ccd1418f71b32f0c4034f4be4dc8f3a93257b7d9113fb" => :high_sierra
-    sha256 "4960b6b0cb836bca2c4d5ff925dfbd6d09d8952c239cbc912200d5c509c5cec5" => :sierra
+    sha256 "3353e8ff76078ad2193c96d271df4ce1da7448bcf08c6ee1ebecc7e69a19cfe6" => :mojave
+    sha256 "1864f6f2028dcc842334c51a1585fbfb49557ef76b1f52ba7bc8e3a9183cf481" => :high_sierra
+    sha256 "2df8b1fd42b06fab2579ba49bb82722a4cbbaf982b26bdbda428eca12ea26d1d" => :sierra
   end
 
   depends_on "openssl"

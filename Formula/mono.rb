@@ -1,13 +1,13 @@
 class Mono < Formula
   desc "Cross platform, open source .NET development framework"
   homepage "https://www.mono-project.com/"
-  url "https://download.mono-project.com/sources/mono/mono-5.18.0.268.tar.bz2"
-  sha256 "04ee081482b2f3e37ab7e2f92e2127e9e7b63211dbaa364e5b22b227a6b1bb8c"
+  url "https://download.mono-project.com/sources/mono/mono-6.0.0.319.tar.xz"
+  sha256 "6b4c80b88bf7688178797bfecc681e3dbc4c6810413c97d6f3c476061a8d261a"
 
   bottle do
-    sha256 "dcf2276c920131e6e631fc05d4e5ba90f7c55f21d294a9c04003758a0dac4a55" => :mojave
-    sha256 "9a8479f67d9073dc3e0fb25ca5d4f7e228e222d1ec2404f596b114c36f81eee9" => :high_sierra
-    sha256 "3343153cbf23009edcfc2c3f57cb4f02866849654c0cc6328667a4c6d16a1d0c" => :sierra
+    sha256 "827625acd51ffa917590a201af22792e97349020a2d4a0f1e7c5079d8df7a09b" => :mojave
+    sha256 "3e37aef77afd05f9f4746ea6fa7416ffb91a97d096e4f460b8c3f8c0c3c97422" => :high_sierra
+    sha256 "84bb8d28194e1f271ea7f546c758c3eb61a50a9c686c2ee692a596d3d4d887a8" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -28,23 +28,21 @@ class Mono < Formula
 
   resource "fsharp" do
     url "https://github.com/fsharp/fsharp.git",
-        :tag      => "10.2.1",
-        :revision => "3de387432de8d11a89f99d1af87aa9ce194fe21b"
+        :tag      => "10.2.3",
+        :revision => "e31bc96e8a5e5742af1c6c45d55d5cc06bb524cb"
   end
 
   # When upgrading Mono, make sure to use the revision from
   # https://github.com/mono/mono/blob/mono-#{version}/packaging/MacSDK/msbuild.py
   resource "msbuild" do
     url "https://github.com/mono/msbuild.git",
-        :revision => "804bde742bdf9d65c7ceb672a3d5400c0c22e628"
+        :revision => "ad9c9926a76e3db0d2b878a24d44446d73640d19"
   end
 
   def install
     system "./configure", "--prefix=#{prefix}",
-                          "--disable-dependency-tracking",
                           "--disable-silent-rules",
-                          "--enable-nls=no",
-                          "--build=x86_64-apple-darwin"
+                          "--enable-nls=no"
     system "make"
     system "make", "install"
     # mono-gdb.py and mono-sgen-gdb.py are meant to be loaded by gdb, not to be
@@ -56,7 +54,7 @@ class Mono < Formula
 
     # Next build msbuild
     resource("msbuild").stage do
-      system "./build.sh", "-hostType", "mono", "-configuration", "Release", "-skipTests"
+      system "./eng/cibuild_bootstrapped_msbuild.sh", "--host_type", "mono", "--configuration", "Release", "--skip_tests"
       system "./artifacts/mono-msbuild/msbuild", "mono/build/install.proj",
              "/p:MonoInstallPrefix=#{prefix}", "/p:Configuration=Release-MONO",
              "/p:IgnoreDiffFailure=true"

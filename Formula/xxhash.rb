@@ -1,15 +1,14 @@
 class Xxhash < Formula
   desc "Extremely fast non-cryptographic hash algorithm"
   homepage "https://github.com/Cyan4973/xxHash"
-  url "https://github.com/Cyan4973/xxHash/archive/v0.6.5.tar.gz"
-  sha256 "19030315f4fc1b4b2cdb9d7a317069a109f90e39d1fe4c9159b7aaa39030eb95"
+  url "https://github.com/Cyan4973/xxHash/archive/v0.7.1.tar.gz"
+  sha256 "afa29766cfc0448ff4a1fd9f2c47e02c48d50be5b79749925d15d545008c3f81"
 
   bottle do
     cellar :any
-    sha256 "00e30f371e2ca836cecfe3efabe4a488fbf3ddfa61f9aef6b2725f95f39dcd32" => :mojave
-    sha256 "283532f22d512db5c2266a64f84a425a0fa3f6048aeb751fcb159df191b70763" => :high_sierra
-    sha256 "fedfdf613f1d60af81bb1bc5bbc125249a5ae0d8c6fe0863d677e641b5cad52f" => :sierra
-    sha256 "7cbdee7d1220206000efe718a6c599d70142f2ce006e9d6743e1f447cd2d3dbd" => :el_capitan
+    sha256 "be63f1db40715777ed72c20e5a75b0491e863dda33d7ba2ca825f256b3f80ef4" => :mojave
+    sha256 "9b4aad450dcb6469088b53d53d305da3ad300245767f93d8709c9ccddc1e9e86" => :high_sierra
+    sha256 "61ceabdb6921692f69f1f51d256ffde7c88b86b58283471ee005ac7806d2cf5f" => :sierra
   end
 
   def install

@@ -3,14 +3,14 @@ class Gtksourceviewmm < Formula
   homepage "https://developer.gnome.org/gtksourceviewmm/"
   url "https://download.gnome.org/sources/gtksourceviewmm/2.10/gtksourceviewmm-2.10.3.tar.xz"
   sha256 "0000df1b582d7be2e412020c5d748f21c0e6e5074c6b2ca8529985e70479375b"
-  revision 4
+  revision 5
 
   bottle do
     cellar :any
-    sha256 "7e3c4284ace0c86f7ccfda14541283048c16f690e46ab1b6e492af5b2afd203c" => :mojave
-    sha256 "aea70d259d3fcdf70e4230cda3b234c5bb1c3ea16839a668c329adbaaad3d05f" => :high_sierra
-    sha256 "f80d564b3ef86998d12118e1f82294178b7d252aba69c536b5dd242a7dc43308" => :sierra
-    sha256 "5081201035ee520569f9dc730e753d73d605a9717bca20c640f3d0365773903b" => :el_capitan
+    rebuild 1
+    sha256 "c82cd52d2db768eb50d2b452c995f717047effb700a063fce8d7a4ad9ea29ac9" => :mojave
+    sha256 "95271d7bb254090c70e8b81638be9346d19ddab4b6c11195596d6e107d97db37" => :high_sierra
+    sha256 "935a6ee355739c40b24dc93f8db22e19e6e94af0e85bdc481f16c7db08239291" => :sierra
   end
 
   depends_on "pkg-config" => :build
@@ -46,6 +46,7 @@ class Gtksourceviewmm < Formula
     gtkx = Formula["gtk+"]
     gtkmm = Formula["gtkmm"]
     gtksourceview = Formula["gtksourceview"]
+    harfbuzz = Formula["harfbuzz"]
     libpng = Formula["libpng"]
     libsigcxx = Formula["libsigc++"]
     pango = Formula["pango"]
@@ -75,6 +76,7 @@ class Gtksourceviewmm < Formula
       -I#{gtkx.opt_include}/gtk-2.0
       -I#{gtkx.opt_include}/gtk-unix-print-2.0
       -I#{gtkx.opt_lib}/gtk-2.0/include
+      -I#{harfbuzz.opt_include}/harfbuzz
       -I#{include}/gtksourceviewmm-2.0
       -I#{libpng.opt_include}/libpng16
       -I#{libsigcxx.opt_include}/sigc++-2.0

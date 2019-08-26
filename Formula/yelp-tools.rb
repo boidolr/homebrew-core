@@ -1,20 +1,22 @@
 class YelpTools < Formula
   desc "Tools that help create and edit Mallard or DocBook documentation"
   homepage "https://github.com/GNOME/yelp-tools"
-  url "https://download.gnome.org/sources/yelp-tools/3.32/yelp-tools-3.32.0.tar.xz"
-  sha256 "bfdd40d10d837d1a170c7fe70b3436d30e6698db809d5be459ea0f7fbb69ee0c"
-  revision 1
+  url "https://download.gnome.org/sources/yelp-tools/3.32/yelp-tools-3.32.2.tar.xz"
+  sha256 "183856b5ed0b0bb2c05dd1204af023946ed436943e35e789afb0295e5e71e8f9"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "4f47c6d9828e28b9135d7b99c7d5ecab1dd44b247a05e849abd1c02edbdfa38f" => :mojave
-    sha256 "1ccfac8c04c1049d1f03c538bc43a525874c8db74298e8c67025dab2910015c8" => :high_sierra
-    sha256 "e3aa9c7a280f00c63e91c385807155b3c50ac7a6877db4d2420fd35b3acfcd8c" => :sierra
+    sha256 "11a07c006a88df5efa908f28109dbc2efb809e82a8f1c3c65ab1811ff57a3132" => :mojave
+    sha256 "11a07c006a88df5efa908f28109dbc2efb809e82a8f1c3c65ab1811ff57a3132" => :high_sierra
+    sha256 "fafe15c9c7a41f4115d0f56646e173944f54f07b8baf01bb4b9a1eb06337749b" => :sierra
   end
 
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
   depends_on "gettext" => :build
   depends_on "intltool" => :build
   depends_on "itstool" => :build
+  depends_on "libtool" => :build
   depends_on "libxml2" => :build
   depends_on "libxslt" => :build
   depends_on "pkg-config" => :build
@@ -35,6 +37,7 @@ class YelpTools < Formula
       ENV.append_path "PKG_CONFIG_PATH", "#{share}/pkgconfig"
     end
 
+    system "autoreconf", "-fi"
     system "./configure", "--prefix=#{prefix}"
     system "make", "install"
   end

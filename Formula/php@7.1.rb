@@ -1,13 +1,14 @@
 class PhpAT71 < Formula
   desc "General-purpose scripting language"
-  homepage "https://secure.php.net/"
-  url "https://php.net/get/php-7.1.27.tar.xz/from/this/mirror"
-  sha256 "25672a3a6060eff37c865a0c84e284da50b7ee8cd57174c78f0ae244b90a96a8"
+  homepage "https://www.php.net/"
+  url "https://www.php.net/distributions/php-7.1.30.tar.xz"
+  sha256 "6310599811536dbe87e4bcf212bf93196bdfaff519d0c821e4c0068efd096a7c"
+  revision 1
 
   bottle do
-    sha256 "4a36b6ac73ede68c60292bcbf812e528e866d7b09530d48afdb302fa3e9adfa3" => :mojave
-    sha256 "9b55c16fc6280cbd4077d20da77c2a84a2877220ad4dfa5f07b7dbca58679986" => :high_sierra
-    sha256 "c418db731cb02e88fb2712fee68de64c4c98e5f63d0dac6d99848cdc022dfc27" => :sierra
+    sha256 "936e79104f3ca3902b4aeebacb4142c3f83eca348e06d8de94109d64ec9c64ee" => :mojave
+    sha256 "e87e8c02a02abb7d04ab6f56818bf439e6321de46e4f87394a1f650f0494cb5c" => :high_sierra
+    sha256 "2e7ffd5eeb53b609bacb9fd248ca2488cdc0f4941b755e87abf3e5bece42be7b" => :sierra
   end
 
   keg_only :versioned_formula
@@ -173,6 +174,12 @@ class PhpAT71 < Formula
     inreplace bin/"php-config", lib/"php", prefix/"pecl"
     inreplace "php.ini-development", %r{; ?extension_dir = "\./"},
       "extension_dir = \"#{HOMEBREW_PREFIX}/lib/php/pecl/#{orig_ext_dir}\""
+
+    # Use OpenSSL cert bundle
+    inreplace "php.ini-development", /; ?openssl\.cafile=/,
+      "openssl.cafile = \"#{HOMEBREW_PREFIX}/etc/openssl/cert.pem\""
+    inreplace "php.ini-development", /; ?openssl\.capath=/,
+      "openssl.capath = \"#{HOMEBREW_PREFIX}/etc/openssl/certs\""
 
     config_files = {
       "php.ini-development"   => "php.ini",

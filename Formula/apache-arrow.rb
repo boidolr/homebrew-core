@@ -1,26 +1,32 @@
 class ApacheArrow < Formula
   desc "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
-  url "https://archive.apache.org/dist/arrow/arrow-0.12.1/apache-arrow-0.12.1.tar.gz"
-  sha256 "e93e43343544e344bbc912b89da01d8abf66596f029d26b2b135b102a9e39895"
+  url "https://www.apache.org/dyn/closer.cgi?path=arrow/arrow-0.14.1/apache-arrow-0.14.1.tar.gz"
+  sha256 "9948ddb6d4798b51552d0dca3252dd6e3a7d0f9702714fc6f5a1b59397ce1d28"
   revision 1
   head "https://github.com/apache/arrow.git"
 
   bottle do
     cellar :any
-    sha256 "f3f5de99bbc3316b6c7c87e00ceb8945fd247a7e677e6e7c9bf67d653ba68c2d" => :mojave
-    sha256 "c04ab30e5bcf672df66859c8179e6ced7458be0f621a3664af1b1d89ff8c46d8" => :high_sierra
-    sha256 "c4231003ed619cbd47cbca2bf74793576f14348b8feea8b3bf22b152dfb82d63" => :sierra
+    sha256 "a7d597453a8d4c70af82cd42f4aa0a3f0af04ab26dba23a117f9c966f0b2a224" => :mojave
+    sha256 "e5f1841ad99528cee1defd3e51f573738c3fcc0723d622d433af4c8c6e799b24" => :high_sierra
+    sha256 "1064f48f13f70f1a1aa9ea71b7ace360cad0ba9aa4b7d80aa5fbf9bbcb18fe90" => :sierra
   end
 
   depends_on "autoconf" => :build
   depends_on "cmake" => :build
   depends_on "boost"
+  depends_on "brotli"
+  depends_on "double-conversion"
   depends_on "flatbuffers"
+  depends_on "glog"
+  depends_on "grpc"
   depends_on "lz4"
   depends_on "numpy"
+  depends_on "openssl"
   depends_on "protobuf"
   depends_on "python"
+  depends_on "rapidjson"
   depends_on "snappy"
   depends_on "thrift"
   depends_on "zstd"
@@ -28,18 +34,14 @@ class ApacheArrow < Formula
   def install
     ENV.cxx11
     args = %W[
+      -DARROW_FLIGHT=ON
       -DARROW_ORC=ON
       -DARROW_PARQUET=ON
       -DARROW_PLASMA=ON
       -DARROW_PROTOBUF_USE_SHARED=ON
       -DARROW_PYTHON=ON
-      -DFLATBUFFERS_HOME=#{Formula["flatbuffers"].prefix}
-      -DLZ4_HOME=#{Formula["lz4"].prefix}
-      -DPROTOBUF_HOME=#{Formula["protobuf"].prefix}
+      -DARROW_INSTALL_NAME_RPATH=OFF
       -DPYTHON_EXECUTABLE=#{Formula["python"].bin/"python3"}
-      -DSNAPPY_HOME=#{Formula["snappy"].prefix}
-      -DTHRIFT_HOME=#{Formula["thrift"].prefix}
-      -DZSTD_HOME=#{Formula["zstd"].prefix}
     ]
 
     mkdir "build"

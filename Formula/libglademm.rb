@@ -3,14 +3,14 @@ class Libglademm < Formula
   homepage "https://gnome.org"
   url "https://download.gnome.org/sources/libglademm/2.6/libglademm-2.6.7.tar.bz2"
   sha256 "38543c15acf727434341cc08c2b003d24f36abc22380937707fc2c5c687a2bc3"
-  revision 4
+  revision 5
 
   bottle do
     cellar :any
-    sha256 "59f07ed8243e98eaa989329ff1c83d548e604aae471a9ae0d6a6e3f5cb922f67" => :mojave
-    sha256 "d4d4e5f046c43138db2839eb7be00b5aa46eb0956d779d53358d993991ed82da" => :high_sierra
-    sha256 "264970cba76877ef75a4b44ed25bc49b9251beaed15d9e4a3914c1d163253bed" => :sierra
-    sha256 "69e5d6ec8c771dbff8620e7cd6421fdbfa789b2d9dd88688081f87ab8697e76e" => :el_capitan
+    rebuild 1
+    sha256 "de2c231f5f9eedfda11ba24decf249ccc5eb49247eb9ade7ceb9f4c36bac299d" => :mojave
+    sha256 "faed1572be2da3f2da0b160b7e7d467cb0bff4023fc283eaa9e6e11c51298d48" => :high_sierra
+    sha256 "70dc2b00a8ad92fbb307e584ede97c8f4515af198a8dcee10b3a2b4a7d992def" => :sierra
   end
 
   depends_on "pkg-config" => :build
@@ -50,6 +50,7 @@ class Libglademm < Formula
     glibmm = Formula["glibmm"]
     gtkx = Formula["gtk+"]
     gtkmm = Formula["gtkmm"]
+    harfbuzz = Formula["harfbuzz"]
     libglade = Formula["libglade"]
     libpng = Formula["libpng"]
     libsigcxx = Formula["libsigc++"]
@@ -79,6 +80,7 @@ class Libglademm < Formula
       -I#{gtkx.opt_include}/gtk-2.0
       -I#{gtkx.opt_include}/gtk-unix-print-2.0
       -I#{gtkx.opt_lib}/gtk-2.0/include
+      -I#{harfbuzz.opt_include}/harfbuzz
       -I#{include}/libglademm-2.4
       -I#{libglade.opt_include}/libglade-2.0
       -I#{libpng.opt_include}/libpng16

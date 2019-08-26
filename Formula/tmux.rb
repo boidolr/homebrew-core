@@ -1,13 +1,15 @@
 class Tmux < Formula
   desc "Terminal multiplexer"
   homepage "https://tmux.github.io/"
-  url "https://github.com/tmux/tmux/releases/download/2.8/tmux-2.8.tar.gz"
-  sha256 "7f6bf335634fafecff878d78de389562ea7f73a7367f268b66d37ea13617a2ba"
+  url "https://github.com/tmux/tmux/releases/download/2.9a/tmux-2.9a.tar.gz"
+  sha256 "839d167a4517a6bffa6b6074e89a9a8630547b2dea2086f1fad15af12ab23b25"
+  revision 1
 
   bottle do
-    sha256 "1853b704405374f88dcb00ef4c82c18efbcbac2ce855de681bd7017c3b5e6b36" => :mojave
-    sha256 "b50d0ac39ae8219d84b9fba7ae5f0422143d8a7a9575b9193d7604dc1b3a85f0" => :high_sierra
-    sha256 "d4b259196136dfb9fe4cf68a348d68edc58ac2b6d0954fe60c6694b053826cd3" => :sierra
+    cellar :any
+    sha256 "a6c847ffc57c9e6d730b1dcfb3ca193588cfdb679a60f221a41690ac8ec202a7" => :mojave
+    sha256 "c01b0af8cf9a266e4ced0aaa6c05bd9c83b69b22ea9c790f0ab38eec4d86fcbf" => :high_sierra
+    sha256 "caeb4047951019c086ddbb8d0ace71b3f62e7266decd2b06c28f0213897292b4" => :sierra
   end
 
   head do
@@ -20,6 +22,7 @@ class Tmux < Formula
 
   depends_on "pkg-config" => :build
   depends_on "libevent"
+  depends_on "ncurses"
 
   resource "completion" do
     url "https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/homebrew_1.0.0/completions/tmux"

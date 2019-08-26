@@ -1,15 +1,15 @@
 class Ledger < Formula
   desc "Command-line, double-entry accounting tool"
   homepage "https://ledger-cli.org/"
-  url "https://github.com/ledger/ledger/archive/3.1.2.tar.gz"
-  sha256 "3ecebe00e8135246e5437e4364bb7a38869fad7c3250b849cf8c18ca2628182e"
+  url "https://github.com/ledger/ledger/archive/v3.1.3.tar.gz"
+  sha256 "b248c91d65c7a101b9d6226025f2b4bf3dabe94c0c49ab6d51ce84a22a39622b"
   revision 1
   head "https://github.com/ledger/ledger.git"
 
   bottle do
-    sha256 "2683f4bc536528f174307e20ccaa005d6acc86cd8bad1d40dc5b139b6c8b780e" => :mojave
-    sha256 "665ec36ed864b27bfebcbb5b2e38f9286b8eb2ab5c27ff550b6a315373465ad0" => :high_sierra
-    sha256 "07a870d7fd711329e5f5ea79f94b80ee21c81da3b97041c024aeca993d7d857c" => :sierra
+    sha256 "475f900dc75447cd051934b33eba933ffa4ad9a8d095600d3e39b3bbea0995eb" => :mojave
+    sha256 "3f57545bdc6d73ec191f5f6cb34f9dd362b40f7c3217e15f3cb21149438745a6" => :high_sierra
+    sha256 "5aa613f6b42bc0f158564b63691783664d3f3de6e7fdf44e06e1848879b7f4d1" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -21,11 +21,6 @@ class Ledger < Formula
 
   def install
     ENV.cxx11
-
-    # Fix for https://github.com/ledger/ledger/pull/1760
-    # Remove in next version
-    inreplace "doc/ledger3.texi", "Getting help, ,",
-                                "Getting help, Third-Party Ledger Tutorials,"
 
     args = %W[
       --jobs=#{ENV.make_jobs}

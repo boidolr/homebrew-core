@@ -2,17 +2,16 @@ class Cppad < Formula
   desc "Differentiation of C++ Algorithms"
   homepage "https://www.coin-or.org/CppAD"
   # Stable versions have numbers of the form 201x0000.y
-  url "https://github.com/coin-or/CppAD/archive/20180000.0.tar.gz"
-  sha256 "a5226e4c5aa2ad6d95668f987b39939315bf134a0a793231984e6d42d6488cca"
+  url "https://github.com/coin-or/CppAD/archive/20190200.3.tar.gz"
+  sha256 "5e074ddfe1e022347c32dddfdf72f2d14bff25ab29448c65c15c5ed1b459dbcc"
   version_scheme 1
   head "https://github.com/coin-or/CppAD.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "15cc465d5de68c2d4a785fedbdcc5e25f9c9eeddbd7ed7b9b755296012340cc2" => :mojave
-    sha256 "b34a0370d6dad092cddb2198d27ff976d2bd146aefbaf16673f35e711776eda7" => :high_sierra
-    sha256 "b34a0370d6dad092cddb2198d27ff976d2bd146aefbaf16673f35e711776eda7" => :sierra
-    sha256 "b34a0370d6dad092cddb2198d27ff976d2bd146aefbaf16673f35e711776eda7" => :el_capitan
+    sha256 "eae636ccddbcbef3cc751f7c4759ae004631e91eacbef1f050facd0c1b72bf47" => :mojave
+    sha256 "eae636ccddbcbef3cc751f7c4759ae004631e91eacbef1f050facd0c1b72bf47" => :high_sierra
+    sha256 "62a4325bd142603730bee7beb52af62fdb5a757895035fd51fc8f63ebec78648" => :sierra
   end
 
   depends_on "cmake" => :build

@@ -1,14 +1,14 @@
 class Poppler < Formula
   desc "PDF rendering library (based on the xpdf-3.0 code base)"
   homepage "https://poppler.freedesktop.org/"
-  url "https://poppler.freedesktop.org/poppler-0.74.0.tar.xz"
-  sha256 "92e09fd3302567fd36146b36bb707db43ce436e8841219025a82ea9fb0076b2f"
+  url "https://poppler.freedesktop.org/poppler-0.79.0.tar.xz"
+  sha256 "f985a4608fe592d2546d9d37d4182e502ff6b4c42f8db4be0a021a1c369528c8"
   head "https://anongit.freedesktop.org/git/poppler/poppler.git"
 
   bottle do
-    sha256 "f1c8ead874f888f7324a5ca6c95efd5e04519038393a89a6f7c030b8807bddc1" => :mojave
-    sha256 "5d050e5f3355e4a72c9bfe4128108a4f64228c0e10fe6bb51aac32a07c10e707" => :high_sierra
-    sha256 "438fc1e448307d1bf17bdc37eb74bbc645ff526b26dd0423915b5f68af12a49d" => :sierra
+    sha256 "5670cd1eaf46c74bd1e62a8f97e663648bbaeedba94782f1a8b733e57b6288c4" => :mojave
+    sha256 "73e1dfe1bb8e9175e5ae70b54611eb36ada9dbc29bb032352979d93bbb1d78c4" => :high_sierra
+    sha256 "c951aee989d755d594eae433cee781a5a46dccf7d5c167bc1a1353466e6943ae" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -70,12 +70,6 @@ class Poppler < Formula
       macho.change_dylib("@rpath/#{libpoppler}", "#{lib}/#{libpoppler}")
       macho.write!
     end
-
-    # fix gobject-introspection support
-    # issue reported upstream as https://gitlab.freedesktop.org/poppler/poppler/issues/18
-    # patch attached there does not work though...
-    inreplace share/"gir-1.0/Poppler-0.18.gir", "@rpath", lib.to_s
-    system "g-ir-compiler", "--output=#{lib}/girepository-1.0/Poppler-0.18.typelib", share/"gir-1.0/Poppler-0.18.gir"
   end
 
   test do

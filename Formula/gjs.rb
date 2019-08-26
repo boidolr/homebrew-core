@@ -1,13 +1,14 @@
 class Gjs < Formula
   desc "JavaScript Bindings for GNOME"
   homepage "https://gitlab.gnome.org/GNOME/gjs/wikis/Home"
-  url "https://download.gnome.org/sources/gjs/1.56/gjs-1.56.0.tar.xz"
-  sha256 "64a7ad5554adb0105fabb432abcfa690033c177d8e650872b469b7cbf475ec1a"
+  url "https://download.gnome.org/sources/gjs/1.56/gjs-1.56.2.tar.xz"
+  sha256 "4c89818c3d0e2186fcc4cb5228e9bf2a1866dd7d6646a18f1b37219b6710a3ac"
+  revision 1
 
   bottle do
-    sha256 "ba510b716d60d4babd4b350cae48d2bcc9d7891183f34903eb34a5ea3e9e27de" => :mojave
-    sha256 "a9832480c3b2d64050669d68d8aae6629137a647fe6382b374a2c1ab01c8cccf" => :high_sierra
-    sha256 "bda3425cf46cabb1df93668c0beebee1818f2c0f65c5932c4dfef208835ddee6" => :sierra
+    sha256 "503b0c377f9d50f293154e7b8d7539153ace5c16d2bd1bdc963ababaa49b2057" => :mojave
+    sha256 "ef2e581c468ccee8078c0da71930e038b500f8f049e6e3a8ef4b08683d9081d7" => :high_sierra
+    sha256 "51c7abfd3a782d396d0d955a4198915c4bcf7507e16b52172a9803b6ae4c6048" => :sierra
   end
 
   depends_on "autoconf@2.13" => :build
@@ -74,6 +75,8 @@ class Gjs < Formula
     (testpath/"test.js").write <<~EOS
       #!/usr/bin/env gjs
       const GLib = imports.gi.GLib;
+      if (31 != GLib.Date.get_days_in_month(GLib.DateMonth.JANUARY, 2000))
+        imports.system.exit(1)
     EOS
     system "#{bin}/gjs", "test.js"
   end

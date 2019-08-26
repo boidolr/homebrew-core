@@ -1,15 +1,15 @@
 class Vtk < Formula
   desc "Toolkit for 3D computer graphics, image processing, and visualization"
   homepage "https://www.vtk.org/"
-  url "https://www.vtk.org/files/release/8.1/VTK-8.1.2.tar.gz"
-  sha256 "0995fb36857dd76ccfb8bb07350c214d9f9099e80b1e66b4a8909311f24ff0db"
-  revision 2
+  url "https://www.vtk.org/files/release/8.2/VTK-8.2.0.tar.gz"
+  sha256 "34c3dc775261be5e45a8049155f7228b6bd668106c72a3c435d95730d17d57bb"
+  revision 1
   head "https://github.com/Kitware/VTK.git"
 
   bottle do
-    sha256 "acd90fab027fe1d8c3fee002e9d6ae53d37cb193867e6760349a95f4cc61c6ed" => :mojave
-    sha256 "9e4cd8949c2562df2ead05265f9e192b270d6b5bfa66c58cb2b235ff32ec1a4f" => :high_sierra
-    sha256 "73986d08c7dcec7cdb5122352e84b4ca7b7c2eb4f1e69ccd4d1a5624c9d5808b" => :sierra
+    sha256 "b1e9c6822831e2776719f201ff67bbb9f8f1a7eeb6c5f51b7a76ccb3d08827ad" => :mojave
+    sha256 "8d99a67e56b753dd97b12d70d85dcabf6e73db84f9f63f740a85ff8f6ec0ff36" => :high_sierra
+    sha256 "d164b9b67b799fa93540f6fd80cc1d91941e190f2dc4a17176ccbd5ddfeae3d2" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -77,14 +77,16 @@ class Vtk < Formula
     end
 
     # Avoid hard-coding Python's Cellar paths
-    inreplace Dir["#{lib}/cmake/**/vtkPython.cmake"].first,
-      Formula["python"].prefix.realpath,
-      Formula["python"].opt_prefix
+    Dir["#{lib}/cmake/**/{vtkPython,VTKTargets}.cmake"].each do |file|
+      inreplace file,
+                Formula["python"].prefix.realpath,
+                Formula["python"].opt_prefix
+    end
 
     # Avoid hard-coding HDF5's Cellar path
     inreplace Dir["#{lib}/cmake/**/vtkhdf5.cmake"].first,
-      Formula["hdf5"].prefix.realpath,
-      Formula["hdf5"].opt_prefix
+              Formula["hdf5"].prefix.realpath,
+              Formula["hdf5"].opt_prefix
   end
 
   test do

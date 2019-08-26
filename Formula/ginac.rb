@@ -1,20 +1,20 @@
 class Ginac < Formula
   desc "Not a Computer algebra system"
   homepage "https://www.ginac.de/"
-  url "https://www.ginac.de/ginac-1.7.4.tar.bz2"
-  sha256 "d60413a2dc4e65b3832491fdcdb03897e673f8ff69885f015e74a6e9c7d978ef"
-  revision 1
+  url "https://www.ginac.de/ginac-1.7.6.tar.bz2"
+  sha256 "fb94700896e682d0df03a9552a3a7065d241ec723237d5ffc9af3f27f148980d"
 
   bottle do
     cellar :any
-    sha256 "bd77d833166418f2d43ba4425bb78c739307f5112d442a5bce4804eb8bdd18fe" => :mojave
-    sha256 "65e1cc9d7a9af229d7f2b26323823fe7eb0540cb9c7f24f9fd65f0a55bec9fe4" => :high_sierra
-    sha256 "fd1070f14cd58bb0121d335b9bbc71334e83a4cecb61eab8736c96064ce55f12" => :sierra
+    sha256 "23693af75cb9391dd6e8136ebef790bb33a5de78989636da1561527dec76133a" => :mojave
+    sha256 "d2700b4f187e704b683e70129cecdd1070033f7cc695576c65cdafb96e753367" => :high_sierra
+    sha256 "3ae47d735dd3f753899ab604a4f463925965da7cc99f91fad08fd8a15a1d22ab" => :sierra
   end
 
   depends_on "pkg-config" => :build
   depends_on "cln"
   depends_on "readline"
+  uses_from_macos "python@2"
 
   def install
     system "./configure", "--disable-dependency-tracking",

@@ -1,14 +1,14 @@
 class Pygobject3 < Formula
   desc "GNOME Python bindings (based on GObject Introspection)"
   homepage "https://wiki.gnome.org/Projects/PyGObject"
-  url "https://download.gnome.org/sources/pygobject/3.32/pygobject-3.32.0.tar.xz"
-  sha256 "83f4d7e59fde6bc6b0d39c5e5208574802f759bc525a4cb8e7265dfcba45ef29"
+  url "https://download.gnome.org/sources/pygobject/3.32/pygobject-3.32.2.tar.xz"
+  sha256 "c39ca2a28364b57fa00549c6e836346031e6b886c3ceabfd8ab4b4fed0a83611"
 
   bottle do
     cellar :any
-    sha256 "592c5c45eb5e6001d87faa4a287c9fcadc296a91024eee7da39f318f8940409c" => :mojave
-    sha256 "9022c03bcfdb461d23733b4ec04fcf7d470d3cb64c6aa847b8c795992f3977c6" => :high_sierra
-    sha256 "d645dba8e9857d2059e60209d72db20d5efa486869a4321dadb1fd11cfa8c8ee" => :sierra
+    sha256 "4ac8bdd6ceb94486ee57b02fcd8f5f76e244a58101cb501d18d104f1b705e9da" => :mojave
+    sha256 "ac2f4323d893c76ad1490e25ab35764ff0deec56c94586e648e2f0b889dfcdd6" => :high_sierra
+    sha256 "15e8e07f5f0be89e6e85886400202347c4e4d00b2b76a8733f8cce16c490c9d8" => :sierra
   end
 
   depends_on "meson" => :build
@@ -27,7 +27,7 @@ class Pygobject3 < Formula
                       "-Dpython=python2.7",
                       ".."
       system "ninja", "-v"
-      system "ninja", "install"
+      system "ninja", "install", "-v"
     end
 
     mkdir "buildpy3" do
@@ -36,7 +36,7 @@ class Pygobject3 < Formula
                       "-Dpython=python3",
                       ".."
       system "ninja", "-v"
-      system "ninja", "install"
+      system "ninja", "install", "-v"
     end
   end
 

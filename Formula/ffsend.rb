@@ -1,14 +1,14 @@
 class Ffsend < Formula
   desc "Fully featured Firefox Send client"
   homepage "https://gitlab.com/timvisee/ffsend"
-  url "https://github.com/timvisee/ffsend/archive/v0.2.30.tar.gz"
-  sha256 "53130e6b50c6b14c8ec04d6d4077800a0b1855ffd0b2bdbb475ae8ec208695bd"
+  url "https://github.com/timvisee/ffsend/archive/v0.2.49.tar.gz"
+  sha256 "3f39dd5f8be525904f4486228fcd51c7f3c0263e23eba096d6f6ceb71e6d73f5"
 
   bottle do
     cellar :any
-    sha256 "547a7c5fabd3111ee422c993127dfa281b25b2866ed6fbf82edd3fde478c90b8" => :mojave
-    sha256 "60070578e9f9a187767b172bc1de242405063641b0cb2092a539f7f02709e85d" => :high_sierra
-    sha256 "4abb91e3d0ab8e03a1b54e116414601cc98503a881cdc790a23508b17ad10064" => :sierra
+    sha256 "cf6ae121b94b7f763f99673ee10500db66eb39bba0ca981a16cd4b80884f52d9" => :mojave
+    sha256 "ec0150c21cac10d09741bf35302909566d3b3a5c303d90ab5d05811c25333da3" => :high_sierra
+    sha256 "18399268fdd5c49619e641037b398eef3a3e14211f44af86e784d729e2d68a09" => :sierra
   end
 
   depends_on "rust" => :build
@@ -23,7 +23,7 @@ class Ffsend < Formula
   end
 
   test do
-    system "#{bin}/ffsend"
+    system "#{bin}/ffsend", "help"
 
     (testpath/"file.txt").write("test")
     url = shell_output("#{bin}/ffsend upload -Iq #{testpath}/file.txt").strip

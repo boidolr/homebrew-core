@@ -1,13 +1,13 @@
 class Mysql < Formula
   desc "Open source relational database management system"
   homepage "https://dev.mysql.com/doc/refman/8.0/en/"
-  url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.15.tar.gz"
-  sha256 "95dbdb54c3967feefb255b96458b089a601e4de238bcc1f328b066018ee47db0"
+  url "https://cdn.mysql.com/Downloads/MySQL-8.0/mysql-boost-8.0.17.tar.gz"
+  sha256 "d44231316ce30a1d1189125ceed86d3388409778e17d0e3b9a060f532463e29a"
 
   bottle do
-    sha256 "7500eb95b9cc0fe315751f61429632b063313b6a7473ef304f54e66acb862541" => :mojave
-    sha256 "e8654a1820cd7de0f025e551e65b89de658657587a252e548f345a4f9a7cf4cd" => :high_sierra
-    sha256 "ac7a996fafc4f5a50a6c37a6f168811953792ffd27068a1aa5cd83a28bf734c5" => :sierra
+    sha256 "10cf5cf9a3d69d003df6d3e199077c86355a23bfbcec4a78c228a665bf138e02" => :mojave
+    sha256 "5dba41b81a061cd6bcf957098c1b56dc17c5d05722ddd0f67b60a9658fb2ec87" => :high_sierra
+    sha256 "6118beb2342ec03ade285293a78fcdec5829d1527a09cc01bd0f043c999603f1" => :sierra
   end
 
   depends_on "cmake" => :build

@@ -1,16 +1,15 @@
 class Tarantool < Formula
   desc "In-memory database and Lua application server"
   homepage "https://tarantool.org/"
-  url "https://download.tarantool.org/tarantool/1.10/src/tarantool-1.10.2.1.tar.gz"
-  sha256 "2d077978a65e785349883ef3c98c46d35af26bcc10dae58eabfca27cfbcc6c6b"
-  revision 2
+  url "https://download.tarantool.org/tarantool/2.2/src/tarantool-2.2.1.1.tar.gz"
+  sha256 "42c6c61b7d9a2444afd96e4f5e1828da18ea2637d1e9d61dc543436ae48dd87f"
   head "https://github.com/tarantool/tarantool.git", :branch => "2.1", :shallow => false
 
   bottle do
     cellar :any
-    sha256 "43c4b7bf9ca4c6f0a4d3f7c04a2080d416cfea4c06f90743bc8429776425c256" => :mojave
-    sha256 "ae13eb556d4805cac33578221daa3684d6e099cc219f1508a86cd635193f5b36" => :high_sierra
-    sha256 "226f292eff0874e0431a07c7ba6a367622ca11f0b10382384b986e1d6ea4a062" => :sierra
+    sha256 "bfab7334c83c2b08d990fd1567605b3a46a6a7242d07b88e5b233bfbe7446f7b" => :mojave
+    sha256 "899df1423b7594dc880a99add686cea5d81d7869b5fa9a10ffeb133a19560235" => :high_sierra
+    sha256 "0e724da858627e134e4c9fc94c3a8d97a1df66fe8b28c30ac737abd7c4980af8" => :sierra
   end
 
   depends_on "cmake" => :build

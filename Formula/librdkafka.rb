@@ -1,25 +1,25 @@
 class Librdkafka < Formula
   desc "The Apache Kafka C/C++ library"
   homepage "https://github.com/edenhill/librdkafka"
-  url "https://github.com/edenhill/librdkafka/archive/v0.11.6.tar.gz"
-  sha256 "9c0afb8b53779d968225edf1e79da48a162895ad557900f75e7978f65e642032"
+  url "https://github.com/edenhill/librdkafka/archive/v1.1.0.tar.gz"
+  sha256 "123b47404c16bcde194b4bd1221c21fdce832ad12912bd8074f88f64b2b86f2b"
   head "https://github.com/edenhill/librdkafka.git"
 
   bottle do
     cellar :any
-    sha256 "fdee6d4f1e1c766f30376ae615897e914a2156813301d109a808110d2fec48aa" => :mojave
-    sha256 "010faca3301dc9b642c4e014b8872d3d6566764a247233922b9c4d2b84cb5765" => :high_sierra
-    sha256 "59cfb8b1c265af8a81156928bd8e3f562e2be178f83702a1d390bfe0e2782144" => :sierra
+    sha256 "70d894cd4ec83c789df7697c333134dd4282d60a236b4fdc82dedf986860bb42" => :mojave
+    sha256 "b4ef9db2570d96ccb2f7f78e1d5086370cc002b9834ad42d9c9b126ffcde3d7e" => :high_sierra
+    sha256 "74aa62a9ae1e4193c7f12d732b0ecce9f636f0e6af80bfa8dd97e63ab9a934a7" => :sierra
   end
 
   depends_on "pkg-config" => :build
   depends_on "lz4"
   depends_on "lzlib"
   depends_on "openssl"
+  depends_on "zstd"
 
   def install
-    system "./configure", "--disable-dependency-tracking",
-                          "--prefix=#{prefix}"
+    system "./configure", "--prefix=#{prefix}"
     system "make"
     system "make", "install"
   end
@@ -31,6 +31,7 @@ class Librdkafka < Formula
       int main (int argc, char **argv)
       {
         int partition = RD_KAFKA_PARTITION_UA; /* random */
+        int version = rd_kafka_version();
         return 0;
       }
     EOS

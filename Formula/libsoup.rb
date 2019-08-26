@@ -1,13 +1,14 @@
 class Libsoup < Formula
   desc "HTTP client/server library for GNOME"
   homepage "https://wiki.gnome.org/Projects/libsoup"
-  url "https://download.gnome.org/sources/libsoup/2.66/libsoup-2.66.0.tar.xz"
-  sha256 "51adc2ad6c8c670cf6339fcfa88190a3b58135a9cddd21f623a0f80fdb9c8921"
+  url "https://download.gnome.org/sources/libsoup/2.66/libsoup-2.66.2.tar.xz"
+  sha256 "bd2ea602eba642509672812f3c99b77cbec2f3de02ba1cc8cb7206bf7de0ae2a"
+  revision 1
 
   bottle do
-    sha256 "0985faab169911df166b2c0c13ea5056458ac8042d8d6f405138f8d8079710a8" => :mojave
-    sha256 "f1eaee335bc250297fb792b387f094d7b95308fbe2b33677ea3d424e6b0cc38b" => :high_sierra
-    sha256 "f757e54086c6cf791c8226fb0987180c8ad1c3b2b054ca37e4eba69d982b6c85" => :sierra
+    sha256 "8336aa92e8a2638745181f159f848b264bec952ecb5571eb36a3dbe62da3a016" => :mojave
+    sha256 "f157867c692050ca95d78b048c01a1f1ada8a8c53c3a65e83397de2a3ae92af8" => :high_sierra
+    sha256 "e8dbd05c6f0eeb707192192c6e1c370678ee63db12963dc1329e61e62b302398" => :sierra
   end
 
   depends_on "gobject-introspection" => :build
@@ -19,20 +20,11 @@ class Libsoup < Formula
   depends_on "libpsl"
   depends_on "vala"
 
-  # submitted upstream as https://gitlab.gnome.org/GNOME/libsoup/merge_requests/49
-  patch :DATA
-
   def install
     mkdir "build" do
       system "meson", "--prefix=#{prefix}", ".."
       system "ninja", "-v"
       system "ninja", "install", "-v"
-    end
-
-    # to be removed when https://gitlab.gnome.org/GNOME/gobject-introspection/issues/222 is fixed
-    %w[Soup-2.4 SoupGNOME-2.4].each do |gir|
-      inreplace share/"gir-1.0/#{gir}.gir", "@rpath", lib.to_s
-      system "g-ir-compiler", "--includedir=#{share}/gir-1.0", "--output=#{lib}/girepository-1.0/#{gir}.typelib", share/"gir-1.0/#{gir}.gir"
     end
   end
 
@@ -72,47 +64,3 @@ class Libsoup < Formula
     system "./test"
   end
 end
-__END__
-diff --git a/libsoup/meson.build b/libsoup/meson.build
-index 5f2a215..92b615f 100644
---- a/libsoup/meson.build
-+++ b/libsoup/meson.build
-@@ -229,6 +229,7 @@ libsoup = library('soup-@0@'.format(apiversion),
-   soup_enums,
-   version : libversion,
-   soversion : soversion,
-+  darwin_versions: darwin_versions,
-   c_args : libsoup_c_args + hidden_visibility_flag,
-   include_directories : configinc,
-   install : true,
-@@ -260,6 +261,7 @@ if enable_gnome
-     soup_gnome_sources + soup_gnome_headers,
-     version : libversion,
-     soversion : soversion,
-+    darwin_versions: darwin_versions,
-     c_args : libsoup_c_args + hidden_visibility_flag,
-     include_directories : configinc,
-     install : true,
-diff --git a/meson.build b/meson.build
-index a979362..e4c5d75 100644
---- a/meson.build
-+++ b/meson.build
-@@ -1,6 +1,6 @@
- project('libsoup', 'c',
-         version: '2.66.0',
--        meson_version : '>=0.47',
-+        meson_version : '>=0.48',
-         license : 'LGPL2',
-         default_options : 'c_std=c89')
-
-@@ -16,6 +16,11 @@ libversion = '1.8.0'
- apiversion = '2.4'
- soversion = '1'
- libsoup_api_name = '@0@-@1@'.format(meson.project_name(), apiversion)
-+libversion_arr = libversion.split('.')
-+darwin_version_major = libversion_arr[0].to_int()
-+darwin_version_minor = libversion_arr[1].to_int()
-+darwin_version_micro = libversion_arr[2].to_int()
-+darwin_versions = [darwin_version_major + darwin_version_minor + 1, '@0@.@1@'.format(darwin_version_major + darwin_version_minor + 1, darwin_version_micro)]
-
- host_system = host_machine.system()

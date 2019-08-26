@@ -1,15 +1,15 @@
 class DnscryptProxy < Formula
   desc "Secure communications between a client and a DNS resolver"
   homepage "https://github.com/jedisct1/dnscrypt-proxy"
-  url "https://github.com/jedisct1/dnscrypt-proxy/archive/2.0.21.tar.gz"
-  sha256 "6e3d4cdf1cf33a36d9fd216ee341c42a7d92f78ac5c00d6c35f09c844efe1d9f"
+  url "https://github.com/jedisct1/dnscrypt-proxy/archive/2.0.25.tar.gz"
+  sha256 "774696004c9e306e1723b4cbbe66a961128a335543d318d0786492ce69b906fa"
   head "https://github.com/jedisct1/dnscrypt-proxy.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "17a4cd7f36d9621e253eaf9c56d35f8b2d4a5b7eb201f03549ec021a85f59fee" => :mojave
-    sha256 "714aa18985f2b497f2b7953873278e295111d04175fd33a7202e8e85e400579d" => :high_sierra
-    sha256 "929aa5be069d8cf79209dc89b4d557902f1a536856fb5aa95abf60c36bbebef5" => :sierra
+    sha256 "bf2ef254831b31ac28994a4040067379d0cf0bf70b09bd08f4711d0f5e1a01b2" => :mojave
+    sha256 "b545bd6d3382892ef6ab9e644d5a8c918ef8686223660af6d4d1651b0bac0ca1" => :high_sierra
+    sha256 "c3b23707a07cfe9d11314320a04a592fd29bde6ca270293e30d869327103491e" => :sierra
   end
 
   depends_on "go" => :build
@@ -56,7 +56,7 @@ class DnscryptProxy < Formula
 
   def plist; <<~EOS
     <?xml version="1.0" encoding="UTF-8"?>
-    <!DOCTYPE plist PUBLIC "-/Apple/DTD PLIST 1.0/EN" "http:/www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
       <dict>
         <key>Label</key>

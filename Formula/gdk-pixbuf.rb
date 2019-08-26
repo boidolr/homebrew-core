@@ -3,11 +3,12 @@ class GdkPixbuf < Formula
   homepage "https://gtk.org"
   url "https://download.gnome.org/sources/gdk-pixbuf/2.38/gdk-pixbuf-2.38.1.tar.xz"
   sha256 "f19ff836ba991031610dcc53774e8ca436160f7d981867c8c3a37acfe493ab3a"
+  revision 1
 
   bottle do
-    sha256 "191484223e3008e91fef28edaac87fddaac10f65e4a061dda3d2e783deb9049e" => :mojave
-    sha256 "7213023a24faa8c847d742cb2c8994416abad45c6f9117274b04821e83df866a" => :high_sierra
-    sha256 "1ad9524a855f609809fc404b68afc6cb417b856921fec44b0710301a74289562" => :sierra
+    sha256 "183c810ede98f4732b2fcbe781670c4f4c5d9e75f4530975864abb524c1911dd" => :mojave
+    sha256 "f7d10a967373df44ce4e0ca18965428f1404513195f1403e7964511b2e091d57" => :high_sierra
+    sha256 "6c98ec526d0c3fbee49f46339d9997e7aeba93a55a655d1b521f93c26ab16c98" => :sierra
   end
 
   depends_on "gobject-introspection" => :build
@@ -61,13 +62,6 @@ class GdkPixbuf < Formula
       libv = s.get_make_var "gdk_pixbuf_binary_version"
       s.change_make_var! "gdk_pixbuf_binarydir",
         HOMEBREW_PREFIX/"lib/gdk-pixbuf-#{gdk_so_ver}"/libv
-    end
-
-    # fix gobject-introspection support
-    # will not be necessary after next release of gobject-introspection
-    %w[GdkPixbuf-2.0 GdkPixdata-2.0].each do |gir|
-      inreplace share/"gir-1.0/#{gir}.gir", "@rpath", lib.to_s
-      system "g-ir-compiler", "--includedir=#{share}/gir-1.0", "--output=#{lib}/girepository-1.0/#{gir}.typelib", share/"gir-1.0/#{gir}.gir"
     end
   end
 

@@ -1,15 +1,13 @@
 class Subversion < Formula
   desc "Version control system designed to be a better CVS"
   homepage "https://subversion.apache.org/"
-  url "https://www.apache.org/dyn/closer.cgi?path=subversion/subversion-1.11.1.tar.bz2"
-  mirror "https://archive.apache.org/dist/subversion/subversion-1.11.1.tar.bz2"
-  sha256 "9efd2750ca4d72ec903431a24b9c732b6cbb84aad9b7563f59dd96dea5be60bb"
+  url "https://www.apache.org/dyn/closer.cgi?path=subversion/subversion-1.12.2.tar.bz2"
+  sha256 "3bd0b5c8e4c5175263dc9a92fd9aef94ce917e80af034f26fe5c45fde7e0f771"
 
   bottle do
-    rebuild 1
-    sha256 "9d3a8c168d6f349d1b61fa842107b74d4a5b14518785ed14a78fd5330e80e7a0" => :mojave
-    sha256 "27c5465c3a107fb20afd70740d058802df1354aaea46b3c60615d49f2592cad8" => :high_sierra
-    sha256 "95b7ba66dbc0450c66af5874df960f675a01ea3ed6a849af629a921a07101e75" => :sierra
+    sha256 "1e4473037a759517eba689e659078fe57efc5c5df3f43346f1274cd9ac592c31" => :mojave
+    sha256 "3e22e30433819422372a463cec25340ca18db785cb999f55a229af5ddd1f24f7" => :high_sierra
+    sha256 "6b696bcfe06c27f70b39ffde9085af247217b16614fb017ce5ae20613f3c30f5" => :sierra
   end
 
   head do
@@ -23,7 +21,7 @@ class Subversion < Formula
   depends_on :java => ["1.8+", :build]
   depends_on "pkg-config" => :build
   depends_on "scons" => :build # For Serf
-  depends_on "swig" => :build
+  depends_on "swig@3" => :build # https://issues.apache.org/jira/browse/SVN-4818
   depends_on "apr"
   depends_on "apr-util"
 

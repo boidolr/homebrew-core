@@ -1,15 +1,14 @@
 class Wget < Formula
   desc "Internet file retriever"
   homepage "https://www.gnu.org/software/wget/"
-  url "https://ftp.gnu.org/gnu/wget/wget-1.20.1.tar.gz"
-  mirror "https://ftpmirror.gnu.org/wget/wget-1.20.1.tar.gz"
-  sha256 "b783b390cb571c837b392857945f5a1f00ec6b043177cc42abb8ee1b542ee1b3"
-  revision 4
+  url "https://ftp.gnu.org/gnu/wget/wget-1.20.3.tar.gz"
+  sha256 "31cccfc6630528db1c8e3a06f6decf2a370060b982841cfab2b8677400a5092e"
+  revision 1
 
   bottle do
-    sha256 "27e8cf4d5455f59447c73f3607911c5448debbd0849bf55bb73d95db2beed687" => :mojave
-    sha256 "2323e1201edae18b1e1d7bdc99c5a5bcc168052fadfc2d88384e29e045c6f92e" => :high_sierra
-    sha256 "a08923ff33761878bd009dbc83c36c98b1d401811da4ac7cde95e7a85683efa9" => :sierra
+    sha256 "96a58c26308afae033e6d6325e7af3f20618b4ca84f2d265ba3ca16a5eae7e65" => :mojave
+    sha256 "8ec2c004992bc9b836a84b560b9c93fe2d46f13c27aac246ab3b72379dfe5c34" => :high_sierra
+    sha256 "cb786d5bf247dc71c57081dfbdbb0762ea31e695954cdb02d75c3e34bc3d1188" => :sierra
   end
 
   head do

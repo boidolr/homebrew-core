@@ -1,15 +1,14 @@
 class Jemalloc < Formula
   desc "malloc implementation emphasizing fragmentation avoidance"
   homepage "http://jemalloc.net/"
-  url "https://github.com/jemalloc/jemalloc/releases/download/5.1.0/jemalloc-5.1.0.tar.bz2"
-  sha256 "5396e61cc6103ac393136c309fae09e44d74743c86f90e266948c50f3dbb7268"
+  url "https://github.com/jemalloc/jemalloc/releases/download/5.2.1/jemalloc-5.2.1.tar.bz2"
+  sha256 "34330e5ce276099e2e8950d9335db5a875689a4c6a56751ef3b1d8c537f887f6"
 
   bottle do
     cellar :any
-    sha256 "be3515eabe8dcdfe892d259f738b5263ac46721e56b2439c523464607ff552e4" => :mojave
-    sha256 "aa1fa19d21dda2217c2d62c43dbee14137dfadb79551513aedb401e9ba150797" => :high_sierra
-    sha256 "7df7b23de1b22db39c95cafb42517dee77c2ce569ed274c1a5ad1659ac7289a5" => :sierra
-    sha256 "84ad0bc4089f342efd901d1b04478495925f98a11a98a05a6b08ac7201963f31" => :el_capitan
+    sha256 "9fbc2052929cedb26b55bf21d0ac539d8ec153d138fde9dbd57e8bf9ed943b81" => :mojave
+    sha256 "8da348f2bc2a3d90e55fb0121b75e3581212e776e5f088f67be1005164917b55" => :high_sierra
+    sha256 "5bf32c065113e0b07db53b73a800516a4ad8ee655cbc50596a1016101c57ec14" => :sierra
   end
 
   head do

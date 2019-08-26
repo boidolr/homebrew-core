@@ -2,14 +2,14 @@ class DockerCredentialHelperEcr < Formula
   desc "Docker Credential Helper for Amazon ECR"
   homepage "https://github.com/awslabs/amazon-ecr-credential-helper"
   url "https://github.com/awslabs/amazon-ecr-credential-helper.git",
-      :tag      => "v0.2.0",
-      :revision => "b9fd5a88b82e749a5227a31409fea58f91bdd489"
+      :tag      => "v0.3.1",
+      :revision => "b4a1707cec17b0533a5b9e9004ef4b59bcd0ca95"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "b268019fbcaf85125b3905b4b6daf7b0d9879bbc2b80b62a3c12ad8d4ef14e36" => :mojave
-    sha256 "ed67a3621f3b9428b2ddd35495333c71d9ed48e78025c9c048e605c6b75a152a" => :high_sierra
-    sha256 "10e0717849f7905bebdaf5f08c99b2b8071341bddf1d5685e7de55c74c51dfbd" => :sierra
+    sha256 "9342cc38595b09bff7c3fa711a503c60acef3ad443619d4d9176658842ce532d" => :mojave
+    sha256 "a442aff2201f14467267465a3d472b1e4d91fe84393608d31a5339edb5d35c34" => :high_sierra
+    sha256 "cd102bb19025f0123e153f40579c613ae063e81f14f4540129249853fafe5a3b" => :sierra
   end
 
   depends_on "go" => :build

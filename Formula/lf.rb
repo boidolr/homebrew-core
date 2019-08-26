@@ -1,26 +1,24 @@
 class Lf < Formula
   desc "Terminal file manager"
   homepage "https://godoc.org/github.com/gokcehan/lf"
-  url "https://github.com/gokcehan/lf/archive/r8.tar.gz"
-  sha256 "b92bfba41cc1b4054c44bf615907380482c66694fc9eaf4affe185b39cb9bb26"
+  url "https://github.com/gokcehan/lf/archive/r13.tar.gz"
+  sha256 "fe99ed9785fbdc606835139c0c52c854b32b1f1449ba83567a115b21d2e882f4"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "ef903843e3c9ae32ff3f09158f526b0db1a95f06ec7de56ad63aa1228a5f5260" => :mojave
-    sha256 "79c3902898bcfcd00c801c471d6dacaae5aa7ba15c7d8433af53c2e41116e1f0" => :high_sierra
-    sha256 "6a3b8a8b61d2470ea28a7d4bcca4755294a85bb89e78764c040d9236665142b2" => :sierra
-    sha256 "424581c37cd4cc18da1a7690c9513b837ae4e405d93e3048470ea2aa148c25b5" => :el_capitan
+    sha256 "ad4cfc498d617d41c02b9482c0411b8048d7eaa934cfed114861555de742cf7c" => :mojave
+    sha256 "e25cfc6246e04b13e90260433cf1fc27a28af17b82ac7d6bb93e09123faa4f61" => :high_sierra
+    sha256 "49a61cf93df5beac903c441087755cc81a4062bcd6f4665aa678cbf21e5c286b" => :sierra
   end
 
-  depends_on "dep" => :build
   depends_on "go" => :build
 
   def install
     ENV["GOPATH"] = buildpath
+    ENV["GO111MODULE"] = "on"
     ENV["version"] = version
     (buildpath/"src/github.com/gokcehan/lf").install buildpath.children
     cd "src/github.com/gokcehan/lf" do
-      system "dep", "ensure", "-vendor-only"
       system "./gen/build.sh", "-o", bin/"lf"
       prefix.install_metafiles
     end

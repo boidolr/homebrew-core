@@ -3,12 +3,14 @@ class Gtkmm3 < Formula
   homepage "https://www.gtkmm.org/"
   url "https://download.gnome.org/sources/gtkmm/3.24/gtkmm-3.24.1.tar.xz"
   sha256 "ddfe42ed2458a20a34de252854bcf4b52d3f0c671c045f56b42aa27c7542d2fd"
+  revision 1
 
   bottle do
     cellar :any
-    sha256 "acc9e0016a3d50efc9d7715252413d783e01bb7300e0aafce8311e9781bab9a2" => :mojave
-    sha256 "fb003fe557b2ed6e5e8fe45527f76ebe9f47c9bbbcb6b5cb0f1880905812f2e0" => :high_sierra
-    sha256 "77c272c6fe1fe736d9b4c905840efc80e6db5d6d4d6e9ee024689ab4082e6978" => :sierra
+    rebuild 1
+    sha256 "409f78d7839955440528daa58d4468745ed82ecfb14b5a6e03aeabe3855fdf37" => :mojave
+    sha256 "9e352e1867a3e138341d8079f7e291d78f17078bc2c577d0e46f0dd86083f9c7" => :high_sierra
+    sha256 "a27610e8384cb69e401e582934b63810c4aef60940e689a27fbc7c3652ef26d8" => :sierra
   end
 
   depends_on "pkg-config" => :build
@@ -44,6 +46,7 @@ class Gtkmm3 < Formula
     glib = Formula["glib"]
     glibmm = Formula["glibmm"]
     gtkx3 = Formula["gtk+3"]
+    harfbuzz = Formula["harfbuzz"]
     libepoxy = Formula["libepoxy"]
     libpng = Formula["libpng"]
     libsigcxx = Formula["libsigc++"]
@@ -70,6 +73,7 @@ class Gtkmm3 < Formula
       -I#{gtkx3.opt_include}
       -I#{gtkx3.opt_include}/gtk-3.0
       -I#{gtkx3.opt_include}/gtk-3.0/unix-print
+      -I#{harfbuzz.opt_include}/harfbuzz
       -I#{include}/gdkmm-3.0
       -I#{include}/gtkmm-3.0
       -I#{libepoxy.opt_include}

@@ -1,13 +1,13 @@
 class Clamav < Formula
   desc "Anti-virus software"
   homepage "https://www.clamav.net/"
-  url "https://www.clamav.net/downloads/production/clamav-0.101.1.tar.gz"
-  sha256 "fa368fa9b2f57638696150c7d108b06dec284e8d8e3b8e702c784947c01fb806"
+  url "https://www.clamav.net/downloads/production/clamav-0.101.4.tar.gz"
+  sha256 "0bf094f0919d158a578421d66bc2569c8c8181233ba162bb51722f98c802bccd"
 
   bottle do
-    sha256 "cbef65f2a166846c4fa9ca587c0fbec377a1097c4ca373dbc516fd3e046c1656" => :mojave
-    sha256 "df08e40c3bf58a94a0a69f07ac784204e6a4dcdddabc9523c7a2f2311e0eef84" => :high_sierra
-    sha256 "62d29e0ff39529a36c6e513493ffd86136efa5b7561ecec13ca1f06521cae955" => :sierra
+    sha256 "f64dacdcdd643b5b0b1d1cd3ed65da7da2234c8166832d6824732ec8f82ec05a" => :mojave
+    sha256 "03d75f551dd0f8e8294813c8e4d9f8788f91442136b4b161a4fdd8a64bd95824" => :high_sierra
+    sha256 "476100c9a34665b941e0f9c5e716394e8bc975a2298cc98fbf903a89ed6c8fd4" => :sierra
   end
 
   head do

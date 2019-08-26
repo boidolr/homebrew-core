@@ -3,16 +3,15 @@ class Osc < Formula
 
   desc "The command-line interface to work with an Open Build Service"
   homepage "https://github.com/openSUSE/osc"
-  url "https://github.com/openSUSE/osc/archive/0.163.0.tar.gz"
-  sha256 "3d994350fe55f00c1819c669f11ab633b19df22a4bd55c3e5ef08364e600823d"
+  url "https://github.com/openSUSE/osc/archive/0.165.2.tar.gz"
+  sha256 "56c0819cd49d18c99561bd5af6f8fcfbf71ae1f56b3efbf34c81d0dfcd70606c"
   head "https://github.com/openSUSE/osc.git"
 
   bottle do
     cellar :any
-    rebuild 1
-    sha256 "88449403387fb548cb64c1f1c5c10e7ba1b241f1b65f97aad22254dab4454fc9" => :mojave
-    sha256 "66accc3b1b095b51ac09cea6f07a0fc74908afc664085c1905dae3617c22313b" => :high_sierra
-    sha256 "0c71a651c136e1e6ec9763e453c2c7a841062269de67cc985df119ca9eb1ead7" => :sierra
+    sha256 "bc6f88c2d4af513745aa41a98188be3b80bc0368eb806e6cfd5ab879939d039c" => :mojave
+    sha256 "fe49c475a2c31fd4f3ba4cf5bd4677119fb9141912c1bfe88fdd2a9c0fb9372c" => :high_sierra
+    sha256 "e7b50c245055734441e6692d003bdecbb2569d0bd58931aae558455501a57fb8" => :sierra
   end
 
   depends_on "swig" => :build

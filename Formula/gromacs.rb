@@ -1,28 +1,36 @@
 class Gromacs < Formula
   desc "Versatile package for molecular dynamics calculations"
   homepage "http://www.gromacs.org/"
-  url "https://ftp.gromacs.org/pub/gromacs/gromacs-2018.3.tar.gz"
-  sha256 "4423a49224972969c52af7b1f151579cea6ab52148d8d7cbae28c183520aa291"
+  url "https://ftp.gromacs.org/pub/gromacs/gromacs-2019.3.tar.gz"
+  sha256 "4211a598bf3b7aca2b14ad991448947da9032566f13239b1a05a2d4824357573"
 
   bottle do
-    sha256 "7e7a91d9324d2eea4c6095a7b469c9b59a103d3e7a564e16f7f647f084c82433" => :mojave
-    sha256 "ecef5c12a18508f6f7a0b6273f606680121f5a2ddc9df2c792cbbbd4ff9463cf" => :high_sierra
-    sha256 "da427af1b26005972c484923bd199ee0fb642096123ed7a1ca5b00916d0353ff" => :sierra
-    sha256 "9096c516ac4cb6cb3e21cf07d1ddbe1e2647ae92c031f2c8d2330ee72a6bfbc0" => :el_capitan
+    sha256 "6f423386809bbdb219b41c619b8a7b241e36e7a4881c155cd6deecb78fe2edfa" => :mojave
+    sha256 "582b641126dcc98177587a85a0a75d953c51ae981976a895e243b33fe6e3e089" => :high_sierra
+    sha256 "08c431f5f67fe71aaf24fdd501ba0d6e2816b273b18a08fa00079a0eeac6d948" => :sierra
   end
 
   depends_on "cmake" => :build
   depends_on "fftw"
-  depends_on "gsl"
+  depends_on "gcc" # for OpenMP
 
   def install
+    # Non-executable GMXRC files should be installed in DATADIR
     inreplace "scripts/CMakeLists.txt", "CMAKE_INSTALL_BINDIR",
                                         "CMAKE_INSTALL_DATADIR"
+    # fix an error on detecting CPU. see https://redmine.gromacs.org/issues/2927
+    inreplace "cmake/gmxDetectCpu.cmake",
+              "\"${GCC_INLINE_ASM_DEFINE} -I${PROJECT_SOURCE_DIR}/src -DGMX_CPUINFO_STANDALONE ${GMX_STDLIB_CXX_FLAGS} -DGMX_TARGET_X86=${GMX_TARGET_X86_VALUE}\")",
+              "${GCC_INLINE_ASM_DEFINE} -I${PROJECT_SOURCE_DIR}/src -DGMX_CPUINFO_STANDALONE ${GMX_STDLIB_CXX_FLAGS} -DGMX_TARGET_X86=${GMX_TARGET_X86_VALUE})"
+
+    args = std_cmake_args + %w[
+      -DCMAKE_C_COMPILER=gcc-9
+      -DCMAKE_CXX_COMPILER=g++-9
+    ]
 
     mkdir "build" do
-      system "cmake", "..", *std_cmake_args, "-DGMX_GSL=ON"
-      system "make"
-      ENV.deparallelize { system "make", "install" }
+      system "cmake", "..", *args
+      system "make", "install"
     end
 
     bash_completion.install "build/scripts/GMXRC" => "gromacs-completion.bash"

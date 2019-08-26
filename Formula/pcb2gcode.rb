@@ -1,29 +1,25 @@
 class Pcb2gcode < Formula
   desc "Command-line tool for isolation, routing and drilling of PCBs"
   homepage "https://github.com/pcb2gcode/pcb2gcode"
-  url "https://github.com/pcb2gcode/pcb2gcode/releases/download/v1.3.2/pcb2gcode-1.3.2.tar.gz"
-  sha256 "c4135cd3981c4a5d6baffa81b7f8e890ae29776107b0d1938b744a8dfebdbc63"
-  revision 4
+  url "https://github.com/pcb2gcode/pcb2gcode/archive/v2.0.0.tar.gz"
+  sha256 "3b7e8cdc58852294d95b0ed705933f528a9e56428863490f5a27f22153cd713e"
+  head "https://github.com/pcb2gcode/pcb2gcode.git"
 
   bottle do
     cellar :any
-    sha256 "1461210908fa8c399a4cb0b45b734b3f5b73fc7a3a5af95d1e24d350d503569b" => :mojave
-    sha256 "0fc767ddeae68a0fa5274bdf756021b9cdb26b6b0ab0cbc5abc6edea5c0843fc" => :high_sierra
-    sha256 "1cff2417d1bfa373a0d3af179177837bda345b81ddc8bbf9c16d5bd4dd370b25" => :sierra
-    sha256 "47cce5c85523d623639e542e096e7571fe40906ae0e5345bd35200f575933950" => :el_capitan
+    sha256 "dd20b8d80aac8a123f6b84ec4400ea50c84691453b40b1afbd9e1f8923c64d55" => :mojave
+    sha256 "2cbc765fb54196489e65e894336e86be43e45adec4b76c780ae8b6a46b789c65" => :high_sierra
+    sha256 "4e87558d43b89905e3bf305c0e066fd43a8d09209da6902db00fa65d12ee09a4" => :sierra
   end
 
-  head do
-    url "https://github.com/pcb2gcode/pcb2gcode.git"
-
-    depends_on "autoconf" => :build
-    depends_on "automake" => :build
-    depends_on "libtool" => :build
-  end
-
+  # Release 2.0.0 doesn't include an autoreconfed tarball
+  depends_on "autoconf" => :build
+  depends_on "automake" => :build
+  depends_on "libtool" => :build
   depends_on "pkg-config" => :build
   depends_on "gerbv"
   depends_on "gtkmm"
+  depends_on "librsvg"
 
   # Upstream maintainer claims that the geometry library from boost >= 1.67
   # is severely broken. Remove the vendoring once fixed.
@@ -73,7 +69,7 @@ class Pcb2gcode < Formula
       system "./b2", *args
     end
 
-    system "autoreconf", "-fvi" if build.head?
+    system "autoreconf", "-fvi"
     system "./configure", "--disable-dependency-tracking",
                           "--disable-silent-rules",
                           "--prefix=#{prefix}",

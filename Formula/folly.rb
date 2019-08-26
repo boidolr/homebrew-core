@@ -1,15 +1,14 @@
 class Folly < Formula
   desc "Collection of reusable C++ library artifacts developed at Facebook"
   homepage "https://github.com/facebook/folly"
-  url "https://github.com/facebook/folly/archive/v2019.03.18.00.tar.gz"
-  sha256 "45b47d5d0ee5652bcb87bde6b03cf5a3232b04b3750056831b9e72ea4e1871db"
-  revision 1
+  url "https://github.com/facebook/folly/archive/v2019.08.05.00.tar.gz"
+  sha256 "80fa5e9fa16ad224eb147fd90fd8b206288b651359206984776ad5e1ee6b9d58"
   head "https://github.com/facebook/folly.git"
 
   bottle do
     cellar :any
-    sha256 "4dd1ddc8954c7bb141aa4dacd21219d57f8130cb2eb13158cf0b90bdcf73df1d" => :mojave
-    sha256 "346e8ba43dd65df198fdf699fd24be138df531529059032eaa2290cfbbf6fe3c" => :high_sierra
+    sha256 "9d4de05cce76ad5b17a0e141fa43205a3c2dc5b95d31f57050ba2c23af55d1f0" => :mojave
+    sha256 "9041e334f9fcab99a098efbb8f8e1e4b857986a992c462db362edfa85cda89b0" => :high_sierra
   end
 
   depends_on "cmake" => :build
@@ -29,27 +28,11 @@ class Folly < Formula
   depends_on "xz"
   depends_on "zstd"
 
-  # Known issue upstream. They're working on it:
-  # https://github.com/facebook/folly/pull/445
-  fails_with :gcc => "6"
-
-  # patch for pclmul compiler flags to fix mojave build
-  patch do
-    url "https://github.com/facebook/folly/commit/964ca3c4979f72115ebfec58056e968a69d5942c.diff?full_index=1"
-    sha256 "b719dd8783f655f0d98cd0e2339ef66753a8d2503c82d334456a86763b0b889f"
-  end
-
   def install
-    ENV.cxx11
-
     mkdir "_build" do
       args = std_cmake_args + %w[
         -DFOLLY_USE_JEMALLOC=OFF
       ]
-
-      # Upstream issue 10 Jun 2018 "Build fails on macOS Sierra"
-      # See https://github.com/facebook/folly/issues/864
-      args << "-DCOMPILER_HAS_F_ALIGNED_NEW=OFF" if MacOS.version == :sierra
 
       system "cmake", "..", *args, "-DBUILD_SHARED_LIBS=ON"
       system "make"
@@ -75,7 +58,7 @@ class Folly < Formula
         return 0;
       }
     EOS
-    system ENV.cxx, "-std=c++11", "test.cc", "-I#{include}", "-L#{lib}",
+    system ENV.cxx, "-std=c++14", "test.cc", "-I#{include}", "-L#{lib}",
                     "-lfolly", "-o", "test"
     system "./test"
   end

@@ -1,14 +1,14 @@
 class Arangodb < Formula
   desc "The Multi-Model NoSQL Database"
   homepage "https://www.arangodb.com/"
-  url "https://download.arangodb.com/Source/ArangoDB-3.4.3.tar.gz"
-  sha256 "5a203e473f4d9802ea2e9a8a5972bce9c05ef1b77bc4d79d889a7278a7d5aa28"
-  head "https://github.com/arangodb/arangodb.git", :branch => "unstable"
+  url "https://download.arangodb.com/Source/ArangoDB-3.5.0.tar.gz"
+  sha256 "b81e30da4249f72b8daa88584cd05388c86ab12eb3185f6558a774e8db5dc9ab"
+  head "https://github.com/arangodb/arangodb.git", :branch => "devel"
 
   bottle do
-    sha256 "b518341b333cc6c81b7c6764fe27d29dd844267bdc82a60df299feb1c6e4508d" => :mojave
-    sha256 "ffd87e6650e80661ed36aa0b92507ef9dc3e1521b592adbd9e67a8b05777a0e5" => :high_sierra
-    sha256 "55d99d170d153b60afb0e5ff76eccf85d74917e4334c25676092238b5bce8a28" => :sierra
+    sha256 "a631dcd7c37b7f05d5339eea94d1459b8d5e531505ae7e62eb7359b49f2d0075" => :mojave
+    sha256 "374f0949052276cdb4e6318dc181ea3af64b2d0cb0eaf9e41132c6d618e4340d" => :high_sierra
+    sha256 "0c0e225a155a9cba74cfdb4f59fe406846042ad2a9c67cf55e08d20650701421" => :sierra
   end
 
   depends_on "cmake" => :build
@@ -16,13 +16,30 @@ class Arangodb < Formula
   depends_on :macos => :yosemite
   depends_on "openssl"
 
-  fails_with :gcc do
-    build 820
-    cause "Generates incorrect code"
+  # see https://gcc.gnu.org/bugzilla/show_bug.cgi?id=87665
+  fails_with :gcc => "7"
+
+  # the ArangoStarter is in a separate github repository;
+  # it is used to easily start single server and clusters
+  # with a unified CLI
+  resource "starter" do
+    url "https://github.com/arangodb-helper/arangodb.git",
+      :revision => "bbe29730e70dba609b57c469e8f863f032fabf3e"
   end
 
   def install
     ENV.cxx11
+
+    resource("starter").stage do
+      ENV.append "GOPATH", Dir.pwd + "/.gobuild"
+      system "make", "deps"
+      # use commit-id as projectBuild
+      commit = `git rev-parse HEAD`.chomp
+      system "go", "build", "-ldflags", "-X main.projectVersion=0.14.12 -X main.projectBuild=#{commit}",
+                            "-o", "arangodb",
+                            "github.com/arangodb-helper/arangodb"
+      bin.install "arangodb"
+    end
 
     mkdir "build" do
       args = std_cmake_args + %W[
@@ -33,6 +50,8 @@ class Arangodb < Formula
         -DCMAKE_INSTALL_DATAROOTDIR=#{share}
         -DCMAKE_INSTALL_SYSCONFDIR=#{etc}
         -DCMAKE_INSTALL_LOCALSTATEDIR=#{var}
+        -DCMAKE_OSX_DEPLOYMENT_TARGET=#{MacOS.version}
+        -DUSE_JEMALLOC=Off
       ]
 
       if ENV.compiler == "gcc-6"
@@ -83,8 +102,31 @@ class Arangodb < Formula
   end
 
   test do
+    require "pty"
+
     testcase = "require('@arangodb').print('it works!')"
     output = shell_output("#{bin}/arangosh --server.password \"\" --javascript.execute-string \"#{testcase}\"")
     assert_equal "it works!", output.chomp
+
+    ohai "#{bin}/arangodb --starter.instance-up-timeout 1m --starter.mode single"
+    PTY.spawn("#{bin}/arangodb", "--starter.instance-up-timeout", "1m",
+              "--starter.mode", "single", "--starter.disable-ipv6",
+              "--server.arangod", "#{sbin}/arangod",
+              "--server.js-dir", "#{share}/arangodb3/js") do |r, _, pid|
+      begin
+        loop do
+          available = IO.select([r], [], [], 60)
+          assert_not_equal available, nil
+
+          line = r.readline.strip
+          ohai line
+
+          break if line.include?("Your single server can now be accessed")
+        end
+      ensure
+        Process.kill "SIGINT", pid
+        ohai "shuting down #{pid}"
+      end
+    end
   end
 end

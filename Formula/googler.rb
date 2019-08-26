@@ -1,15 +1,15 @@
 class Googler < Formula
   desc "Google Search and News from the command-line"
   homepage "https://github.com/jarun/googler"
-  url "https://github.com/jarun/googler/archive/v3.7.1.tar.gz"
-  sha256 "1ceadab40fea49a113f46807a5c7297fcf145eeaa8128e33d53aadb275377f37"
+  url "https://github.com/jarun/googler/archive/v3.9.tar.gz"
+  sha256 "b90c6d28ad6ce0a2a2320806ab2133857fe1a0b6ca2a489d8eda1b8062e620e2"
   head "https://github.com/jarun/googler.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "6165de5e7b9adfd53e7575723e3d817acff8ce56b1c067a9d7dbdb836dc72491" => :mojave
-    sha256 "d44b89bb684a81fcb8a81cabec5f1761747acfa4b11a0be34cd8f22151499240" => :high_sierra
-    sha256 "d44b89bb684a81fcb8a81cabec5f1761747acfa4b11a0be34cd8f22151499240" => :sierra
+    sha256 "724beb16d9338d490be09394270b39fd51a9923b4ba3e17720cfdbfeaf5f738e" => :mojave
+    sha256 "724beb16d9338d490be09394270b39fd51a9923b4ba3e17720cfdbfeaf5f738e" => :high_sierra
+    sha256 "154edd577647bfa1e4cdd9a314bc1dee531eb5772137641c7a6fcfec5cd441a8" => :sierra
   end
 
   depends_on "python"

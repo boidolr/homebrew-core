@@ -1,25 +1,18 @@
 class Haproxy < Formula
   desc "Reliable, high performance TCP/HTTP load balancer"
   homepage "https://www.haproxy.org/"
-  url "https://www.haproxy.org/download/1.9/src/haproxy-1.9.4.tar.gz"
-  sha256 "8483fe12b30256f83d542b3f699e165d8f71bf2dfac8b16bb53716abce4ba74f"
+  url "https://www.haproxy.org/download/2.0/src/haproxy-2.0.5.tar.gz"
+  sha256 "3f2e0d40af66dd6df1dc2f6055d3de106ba62836d77b4c2e497a82a4bdbc5422"
 
   bottle do
     cellar :any
-    sha256 "005dc544ba30b5eb288ab7582bafb2c1016a4683158ac06f5885b2f63f491526" => :mojave
-    sha256 "33ff7981eb28bc40e4771b6a9f6dbe7ac25172c17b5b914009ec3c6e87292a30" => :high_sierra
-    sha256 "9fda53095c30ede7977de844002bf646b577e50bce218219a27b0187ac3da4c3" => :sierra
+    sha256 "05e4dd9ded49d7c4df6b03d760970761f841a16b1854f1299e2ab2d91a31210f" => :mojave
+    sha256 "6caf972d0cdddbec203dfa7bbfdc5b6099bd9645962a8d43b01c998bb9308d15" => :high_sierra
+    sha256 "1d400d6708bdd052b2ffb08c0e56c64d635988b34dd15a55ed7724062b00f9b8" => :sierra
   end
 
   depends_on "openssl"
   depends_on "pcre"
-
-  # Patch for BUILD/MEDIUM: initcall: Fix build on MacOS. See haproxy/haproxy#42
-  # Should be safe to remove on > 1.9.4 release as upstream intend to backport
-  patch do
-    url "https://github.com/haproxy/haproxy/commit/9efa7b8.patch?full_index=1"
-    sha256 "756b26d3518cbf9a84f5957719beb764ac4d25bdb783f839d5b05c5283ac2f62"
-  end
 
   def install
     args = %w[

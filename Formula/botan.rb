@@ -1,14 +1,14 @@
 class Botan < Formula
   desc "Cryptographic algorithms and formats library in C++"
   homepage "https://botan.randombit.net/"
-  url "https://botan.randombit.net/releases/Botan-2.9.0.tgz"
-  sha256 "305564352334dd63ae63db039077d96ae52dfa57a3248871081719b6a9f2d119"
+  url "https://botan.randombit.net/releases/Botan-2.11.0.tar.xz"
+  sha256 "f7874da2aeb8c018fd77df40b2137879bf90b66f5589490c991e83fb3e8094be"
   head "https://github.com/randombit/botan.git"
 
   bottle do
-    sha256 "76acfd7da8c68b14bbd6eab8c023779656ba8b6e63728239ea841801f923e1fc" => :mojave
-    sha256 "7613f1ed4ed336ba1fde3a1469f3f286ebc8005cc8f73c7e41d8c146b729ea82" => :high_sierra
-    sha256 "5686536b81aea251723b8f05cf14cda6c3d5f89b46e61a35b524ae61b49761f5" => :sierra
+    sha256 "55abedd7f11bd8e778be3e841c225854ebff3f6bb50907f9011d84d48bf487f6" => :mojave
+    sha256 "488635ef973781ccd7d796fca009d387580a99a375fe356d6f7e161c35c9bdff" => :high_sierra
+    sha256 "cf4a6a75863dfdf7ce4e9e82c81e5e6bcf11246d9eeca2e9eb5b2a4bcee9804a" => :sierra
   end
 
   depends_on "pkg-config" => :build

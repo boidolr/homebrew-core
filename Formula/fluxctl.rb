@@ -2,28 +2,27 @@ class Fluxctl < Formula
   desc "Command-line tool to access Weave Flux, the Kubernetes GitOps operator"
   homepage "https://github.com/weaveworks/flux"
   url "https://github.com/weaveworks/flux.git",
-      :tag      => "1.8.2",
-      :revision => "e3baeeb98fcbb7b267bf94ca5184833e75ec779c"
+      :tag      => "1.14.1",
+      :revision => "c76e388cca59a1b1cbd5dd749f70e9c87a57031f"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "91bbddffb277989db8712eb26f76e7d81a18ff5caaef4d8ad37fd5493faf6d97" => :mojave
-    sha256 "f0ef0358d27ee89d14367863a3161be73933f1d3a8563fcb15171dbe2bbc4821" => :high_sierra
-    sha256 "c72d112d9567103a79da77e21e7c25df6fb6e2f8fc2ae6aa5a89dd24e85ff59e" => :sierra
+    sha256 "bf532fd7ae98a29cfdaf7526eddb9c9fab77352886fd4567b8bac2f46153984b" => :mojave
+    sha256 "599dda77e105893524eb24e38fc746b658a61ed0f26300dc50b0518309762370" => :high_sierra
+    sha256 "cd116996459352561b5545f241b499c7ee76f4c2799160bf8b44fa51ceadf1db" => :sierra
   end
 
-  depends_on "dep" => :build
   depends_on "go" => :build
 
   def install
     ENV["GOPATH"] = buildpath
-    dir = buildpath/"src/github.com/weaveworks/flux"
-    dir.install buildpath.children - [buildpath/".brew_home"]
+    ENV["GO111MODULE"] = "on"
 
-    cd dir do
-      system "dep", "ensure", "-vendor-only"
-      system "make", "release-bins"
-      bin.install "build/fluxctl_darwin_amd64" => "fluxctl"
+    dir = buildpath/"src/github.com/weaveworks/flux"
+    dir.install buildpath.children
+
+    cd dir/"cmd/fluxctl" do
+      system "go", "build", "-ldflags", "-X main.version=#{version}", "-o", bin/"fluxctl"
       prefix.install_metafiles
     end
   end
@@ -43,7 +42,7 @@ class Fluxctl < Formula
     r, _w, pid = PTY.spawn("#{bin}/fluxctl sync", :err=>:out)
     begin
       Timeout.timeout(5) do
-        assert r.gets.chomp =~ %r{Error: stat .*\/.kube\/config: no such file or directory}
+        assert_match r.gets.chomp, "Error: Could not load kubernetes configuration file: invalid configuration: no configuration has been provided"
         Process.wait pid
         assert_equal 1, $CHILD_STATUS.exitstatus
       end

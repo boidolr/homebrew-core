@@ -3,12 +3,14 @@ class Tectonic < Formula
   homepage "https://tectonic-typesetting.github.io/"
   url "https://github.com/tectonic-typesetting/tectonic/archive/v0.1.11.tar.gz"
   sha256 "e700dc691dfd092adfe098b716992136343ddfac5eaabb1e8cfae4e63f8454c7"
-  revision 1
+  revision 2
 
   bottle do
-    sha256 "1a7529e618b09f3b3c7852d7734f631847c7d31334ebe43d10a5da3dc14bc6b4" => :mojave
-    sha256 "5bfc6c5d8d8f1c80ed55e7543bb081a6fa1f83faa8ca01759541b179f62c9c65" => :high_sierra
-    sha256 "86202b51be7fe24c4306ca5e38aa39112bc879d0f651bffdee0d35e1ca71d72f" => :sierra
+    cellar :any
+    rebuild 1
+    sha256 "db042190cb7aa26b8a926f36310968960fbd01ed34700df6e5a4ac00bd26fd32" => :mojave
+    sha256 "1b35ff73005abc5627a4149d97b1259e7dcc222484bfc089fd8205d9efb9fb25" => :high_sierra
+    sha256 "53068153d241239bc41f6b8a667bf03ee2e723621fdbadc2d35f62f250919011" => :sierra
   end
 
   depends_on "pkg-config" => :build
@@ -29,12 +31,12 @@ class Tectonic < Formula
     ENV["OPENSSL_DIR"] = Formula["openssl"].opt_prefix
 
     system "cargo", "install", "--root", prefix, "--path", "."
-    pkgshare.install "tests"
   end
 
   test do
-    system bin/"tectonic", "-o", testpath, pkgshare/"tests/xenia/paper.tex"
-    assert_predicate testpath/"paper.pdf", :exist?, "Failed to create paper.pdf"
-    assert_match "PDF document", shell_output("file paper.pdf")
+    (testpath/"test.tex").write 'Hello, World!\bye'
+    system bin/"tectonic", "-o", testpath, "--format", "plain", testpath/"test.tex"
+    assert_predicate testpath/"test.pdf", :exist?, "Failed to create test.pdf"
+    assert_match "PDF document", shell_output("file test.pdf")
   end
 end

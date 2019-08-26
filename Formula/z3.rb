@@ -1,16 +1,15 @@
 class Z3 < Formula
   desc "High-performance theorem prover"
   homepage "https://github.com/Z3Prover/z3"
-  url "https://github.com/Z3Prover/z3/archive/z3-4.8.4.tar.gz"
-  sha256 "5a18fe616c2a30b56e5b2f5b9f03f405cdf2435711517ff70b076a01396ef601"
-  revision 2
+  url "https://github.com/Z3Prover/z3/archive/Z3-4.8.5.tar.gz"
+  sha256 "4e8e232887ddfa643adb6a30dcd3743cb2fa6591735fbd302b49f7028cdc0363"
   head "https://github.com/Z3Prover/z3.git"
 
   bottle do
     cellar :any
-    sha256 "af966034f75cc9216e051b87471c7e3201bf7498bc0922efe56bf50aec83344e" => :mojave
-    sha256 "ff491bde03d10b1d517c8fec2814354fe34e47f8165a827b2942706586c24b1f" => :high_sierra
-    sha256 "dcf3613255d1f4bb7c5f1a24a7786043eeb4801ba936f60c03a428e8254f3417" => :sierra
+    sha256 "67c0f04c418426399348b07a60523b56551fb379a82caa5e9b1645d4ac5dea65" => :mojave
+    sha256 "0379fcfacb4a0ceafb670855924604609c056b3bedbc6c7191bd937898026ef7" => :high_sierra
+    sha256 "6b58192eab08a5e4da344c2811f448ea0bb148d84dfdf3d3729df76bbc468825" => :sierra
   end
 
   depends_on "python"
@@ -28,12 +27,8 @@ class Z3 < Formula
       system "make", "install"
     end
 
-    # qprofdiff is not yet part of the source release (it will be as soon as a
-    # version is released after 4.5.0), so we only include it in HEAD builds
-    if build.head?
-      system "make", "-C", "contrib/qprofdiff"
-      bin.install "contrib/qprofdiff/qprofdiff"
-    end
+    system "make", "-C", "contrib/qprofdiff"
+    bin.install "contrib/qprofdiff/qprofdiff"
 
     pkgshare.install "examples"
   end

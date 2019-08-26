@@ -1,14 +1,13 @@
 class Glib < Formula
   desc "Core application library for C"
   homepage "https://developer.gnome.org/glib/"
-  url "https://download.gnome.org/sources/glib/2.60/glib-2.60.0.tar.xz"
-  sha256 "20865d8b96840d89d9340fc485b4b1131c1bb24d16a258a22d642c3bb1b44353"
-  revision 1
+  url "https://download.gnome.org/sources/glib/2.60/glib-2.60.6.tar.xz"
+  sha256 "ff8fab8d8deaa4fd0536c90f90d9769a09071779c7e6183907f6855645bffb6c"
 
   bottle do
-    sha256 "7f3dda9780ca3352b170afb63175cb8ebd6d759c028a088f5f73103ad312bdc4" => :mojave
-    sha256 "2813d19cd554f197a914f40200fb1460cb9192d0ad0b19d7b224b4e13f16a2fa" => :high_sierra
-    sha256 "c141ff8a13d4df9a5b41bc5b22ff4b80b6a2ea17fc162a6ef6a29a84c86d53fa" => :sierra
+    sha256 "cb0b27f37cc011ba0e5ffcd044273c6b5e25da50fd230633b00d1f00ed72a645" => :mojave
+    sha256 "e4724ebd7416a7ea891adbfa06af1d4f938d4fe5bcd0e5dcff31f47e0debf8f3" => :high_sierra
+    sha256 "a7e5f7d3736fd08041edafe031fc172db1a1abb943af7510594670f6acb00b68" => :sierra
   end
 
   depends_on "meson" => :build
@@ -18,6 +17,7 @@ class Glib < Formula
   depends_on "libffi"
   depends_on "pcre"
   depends_on "python"
+  uses_from_macos "util-linux" # for libmount.so
 
   # https://bugzilla.gnome.org/show_bug.cgi?id=673135 Resolved as wontfix,
   # but needed to fix an assumption about the location of the d-bus machine
@@ -36,6 +36,7 @@ class Glib < Formula
       -Diconv=native
       -Dgio_module_dir=#{HOMEBREW_PREFIX}/lib/gio/modules
       -Dbsymbolic_functions=false
+      -Ddtrace=false
     ]
 
     mkdir "build" do

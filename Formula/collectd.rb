@@ -1,13 +1,14 @@
 class Collectd < Formula
   desc "Statistics collection and monitoring daemon"
   homepage "https://collectd.org/"
-  url "https://collectd.org/files/collectd-5.8.1.tar.bz2"
-  sha256 "e796fda27ce06377f491ad91aa286962a68c2b54076aa77a29673d53204453da"
+  url "https://collectd.org/files/collectd-5.9.0.tar.bz2"
+  sha256 "7b220f8898a061f6e7f29a8c16697d1a198277f813da69474a67911097c0626b"
+  revision 2
 
   bottle do
-    sha256 "ffa5b1bd3d607e47410ba26ef11b3d7132f42049a035c9b87ddadad385c3546f" => :mojave
-    sha256 "61e26ab9d8127ddf942dcd163c6c78f50890b05f309ed7e329c7b8f859205c96" => :high_sierra
-    sha256 "486dbe8acc823c12263308eddadf22e56c862161e190c7b2f1b57e6feeb99384" => :sierra
+    sha256 "e34c38202af11c490bc896a9f98a6c9aeadf31d8f5e5401cfa55e96864afd1be" => :mojave
+    sha256 "1ca2e990edc1871be07d25c87c641d1f6494830fc33894411280d7e8263618a7" => :high_sierra
+    sha256 "e0d01ccb0ccc6933d01291ac0c68969e7fe734a308e33497bbef5965df170c07" => :sierra
   end
 
   head do
@@ -22,6 +23,7 @@ class Collectd < Formula
   depends_on "libtool"
   depends_on "net-snmp"
   depends_on "riemann-client"
+  uses_from_macos "perl"
 
   def install
     args = %W[

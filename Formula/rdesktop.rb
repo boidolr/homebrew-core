@@ -1,15 +1,13 @@
 class Rdesktop < Formula
   desc "UNIX client for connecting to Windows Remote Desktop Services"
   homepage "https://www.rdesktop.org/"
-  url "https://downloads.sourceforge.net/project/rdesktop/rdesktop/1.8.3/rdesktop-1.8.3.tar.gz"
-  mirror "https://mirrors.kernel.org/debian/pool/main/r/rdesktop/rdesktop_1.8.3.orig.tar.gz"
-  sha256 "88b20156b34eff5f1b453f7c724e0a3ff9370a599e69c01dc2bf0b5e650eece4"
-  revision 1
+  url "https://github.com/rdesktop/rdesktop/releases/download/v1.8.6/rdesktop-1.8.6.tar.gz"
+  sha256 "4131c5cc3d6a2e1a6515180502093c2b1b94cc8c34dd3f86aa8b3475399634ef"
 
   bottle do
-    sha256 "9a0d85e617805161eb6f06359a8c72af0d6b45d6316986307ad036022d8ff8d8" => :mojave
-    sha256 "d43503deba0816e2290a9ef69a0e618015c003421f0ba60af24e83e1a62b5316" => :high_sierra
-    sha256 "9a8e06ed924645367b0dbb7e1668ce0925746c6e88a7bc0bc0fb184c0b955461" => :sierra
+    sha256 "502610835305f8ad03ffaff82d4ed349ec999680e79835225c1053124cb6b628" => :mojave
+    sha256 "86b656a23bae94a0eb4769f69afe491bc6b620320c450679a1f32250a89f5edb" => :high_sierra
+    sha256 "e8a895ce49ccf9df4b41f557a53dedf055eec20f14c17d24351750b816695d45" => :sierra
   end
 
   depends_on "openssl"

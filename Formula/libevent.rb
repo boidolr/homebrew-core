@@ -1,16 +1,14 @@
 class Libevent < Formula
   desc "Asynchronous event library"
   homepage "https://libevent.org/"
-  url "https://github.com/libevent/libevent/archive/release-2.1.8-stable.tar.gz"
-  sha256 "316ddb401745ac5d222d7c529ef1eada12f58f6376a66c1118eee803cb70f83d"
+  url "https://github.com/libevent/libevent/archive/release-2.1.11-stable.tar.gz"
+  sha256 "229393ab2bf0dc94694f21836846b424f3532585bac3468738b7bf752c03901e"
 
   bottle do
     cellar :any
-    sha256 "9ab81f4ca9902042f7ea95d02bf36394c5cdc11d715b7f928badc9cf5724ca8b" => :mojave
-    sha256 "61a8cf2df6d58f79678fad0f798b6a9d368245097f908e2f911f25cb3f7916cf" => :high_sierra
-    sha256 "cdd11d67b5f49b94cf3fbfd24753f84082957e3d55680e2b5979eec19091e694" => :sierra
-    sha256 "136a93a91c3724d0403b0d43d0b9a4bf6b857278c4ebb7c7585ef70a19b0964c" => :el_capitan
-    sha256 "ef703db1b4cbdab35b89aabe80c225dd9b7a2c3ea14b1eae681478c5b9df15fe" => :yosemite
+    sha256 "0a8ab56e634a686654b83cfa5a94ea7a388bc19149372fceea54663cbad029f9" => :mojave
+    sha256 "44db0195483e874f8c8fc7ed4bb6e6f82bf31b17536859fdf2189dcedf70ca1e" => :high_sierra
+    sha256 "61c7fa8f31268fa382b5bdc99d37f5d463aa673e661db562458dc34d599be75c" => :sierra
   end
 
   depends_on "autoconf" => :build
@@ -33,6 +31,7 @@ class Libevent < Formula
     system "make", "install"
     system "make", "doxygen"
     man3.install Dir["doxygen/man/man3/*.3"]
+    doc.install Dir["doxygen/html/*"]
   end
 
   test do

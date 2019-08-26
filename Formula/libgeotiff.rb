@@ -1,17 +1,18 @@
 class Libgeotiff < Formula
   desc "Library and tools for dealing with GeoTIFF"
   homepage "https://geotiff.osgeo.org/"
-  url "https://github.com/OSGeo/libgeotiff/releases/download/1.4.3/libgeotiff-1.4.3.tar.gz"
-  sha256 "b8510d9b968b5ee899282cdd5bef13fd02d5a4c19f664553f81e31127bc47265"
+  url "https://github.com/OSGeo/libgeotiff/releases/download/1.5.1/libgeotiff-1.5.1.tar.gz"
+  sha256 "f9e99733c170d11052f562bcd2c7cb4de53ed405f7acdde4f16195cd3ead612c"
 
   bottle do
-    sha256 "bfdaeec165954cc2bfdee12708269c662849e482e7ed2d837022f610ff65188d" => :mojave
-    sha256 "f17f672c8720ed21ee46cdafdb956846ef5479e81754ba7ba4c5a73698b3a6ea" => :high_sierra
-    sha256 "c47ceaef8471c86b2d4d55b0d97e26a52d53bdcb784b9159ffd201a183eb8763" => :sierra
+    cellar :any
+    sha256 "5feecdec004c5bc749dbc16c4dda70382b001ad1e64ab7035086cfb425abf231" => :mojave
+    sha256 "f34254f5d27c0b074d1b74dc4c73baeb8c042b4126a0e7283b7e11911e0e0e0c" => :high_sierra
+    sha256 "b8f77860ec5528e75e3c74991ec06885a65dd0fab8d9b153a2742c8696e7e43b" => :sierra
   end
 
   head do
-    url "https://svn.osgeo.org/metacrs/geotiff/trunk/libgeotiff"
+    url "https://github.com/OSGeo/libgeotiff.git"
 
     depends_on "autoconf" => :build
     depends_on "automake" => :build

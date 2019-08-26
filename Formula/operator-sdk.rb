@@ -1,29 +1,30 @@
 class OperatorSdk < Formula
   desc "SDK for building Kubernetes applications"
   homepage "https://coreos.com/operators/"
-  url "https://github.com/operator-framework/operator-sdk/archive/v0.6.0.tar.gz"
-  sha256 "d6c21b9289cae221026a21df2a333f1e4d8d08c996c2104a94b8514e836dfe9f"
+  url "https://github.com/operator-framework/operator-sdk.git",
+      :tag      => "v0.10.0",
+      :revision => "ff80b17737a6a0aade663e4827e8af3ab5a21170"
   head "https://github.com/operator-framework/operator-sdk.git"
 
   bottle do
     cellar :any_skip_relocation
-    sha256 "6debfa6b81782848fabcb51a49f7215d43f971d5b578709e74c57ac1037327b1" => :mojave
-    sha256 "19c9df8904b187338fb1f76ee4ee30db34bf61a010253eb14909e694c5095def" => :high_sierra
-    sha256 "c6264a8515b083ab80d9d342899ee10b6f687f2063e7ae01c169e7cbbeaaae8d" => :sierra
+    sha256 "4dd029800a64eab9ea04f49f60da816982cd3087ab47cb70e18e103c4f1390de" => :mojave
+    sha256 "adef1143400f267b08bb7b470f48cc4be8afdb8d6a25bbf85d65a4e4aa8c1038" => :high_sierra
+    sha256 "1f60ddd6915551a9c7dbad82402be2d05469544c14776662301eedaa71e4c4b1" => :sierra
   end
 
-  depends_on "dep"
   depends_on "go"
 
   def install
     ENV["GOPATH"] = buildpath
-    dir = buildpath/"src/github.com/operator-framework/operator-sdk"
-    dir.install buildpath.children - [buildpath/".brew_home"]
+    ENV["GO111MODULE"] = "on"
 
-    cd dir do
+    src = buildpath/"src/github.com/operator-framework/operator-sdk"
+    src.install buildpath.children
+    src.cd do
       # Make binary
-      system "make", "install"
-      bin.install buildpath/"bin/operator-sdk"
+      system "make", "build/operator-sdk-#{stable.specs[:tag]}-x86_64-apple-darwin"
+      bin.install "build/operator-sdk-v0.10.0-x86_64-apple-darwin" => "operator-sdk"
 
       # Install bash completion
       output = Utils.popen_read("#{bin}/operator-sdk completion bash")
@@ -39,12 +40,12 @@ class OperatorSdk < Formula
 
   test do
     ENV["GOPATH"] = testpath
+    ENV["GO111MODULE"] = "on"
     dir = testpath/"src/example.com/test-operator"
     dir.mkpath
-
-    cd dir do
+    cd testpath/"src" do
       # Create a new, blank operator framework
-      system "#{bin}/operator-sdk", "new", "test"
+      system "#{bin}/operator-sdk", "new", "test", "--skip-validation"
     end
   end
 end

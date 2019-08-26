@@ -1,16 +1,15 @@
 class AvroCpp < Formula
   desc "Data serialization system"
   homepage "https://avro.apache.org/"
-  url "https://www.apache.org/dyn/closer.cgi?path=avro/avro-1.8.2/cpp/avro-cpp-1.8.2.tar.gz"
-  sha256 "5328b913882ee5339112fa0178756789f164c9c5162e1c83437a20ee162a3aab"
+  url "https://www.apache.org/dyn/closer.cgi?path=avro/avro-1.9.0/cpp/avro-cpp-1.9.0.tar.gz"
+  sha256 "3a66aa600dbb171cda4664fce1c5a73a9720c8b0f55b13f76650453be6d6ab97"
+  revision 1
 
   bottle do
     cellar :any
-    sha256 "0a45a73085609cd13b6f4b65194f60caf507c3f624a458c09d4409dd7ae6eee4" => :mojave
-    sha256 "92474608c57be07c5453914f40ac5579affe1c2852776c99784559028ae61808" => :high_sierra
-    sha256 "319664d5b1f6dcfca5485ca7e30c10b316a6b865658bb4d86e94036312400792" => :sierra
-    sha256 "608da3caf3b22380430f27975bd00c240f9b852fb7b2bfa1a06c91ff25bf6245" => :el_capitan
-    sha256 "30de5dd8b0328916218197bf57e6d74695c770a9c53194a0ec4d2676934dc27b" => :yosemite
+    sha256 "8fcc26c4a11b256e76b7a9db4115bb5e00fffe8d0b44d07d5e52caf8812317a9" => :mojave
+    sha256 "702007c9685e8c9c09ecb3a3b24f4a234e8c152de713a01b54f8c7357f57c754" => :high_sierra
+    sha256 "61f017da24e1b5da7a67d57f24ce5be6fe6c7c7336b32a181c3eaf359724bd93" => :sierra
   end
 
   depends_on "cmake" => :build
